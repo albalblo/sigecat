@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-------------------------------------------------------------------------------------------------
+ - Proyecto de Fin de Ciclo Formativo de Grado Superior                                           -
+ - 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                -
+ - Alumno: Alberto A. Alsina Ambrós                                                               -
+ - Tutor: Jordan Llorach Beltrán                                                                  -
+ - Centro formativo: IES Joan Coromines (Benicarló, España)                                       -
+ - Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (CFGS DAW)                 -
+ - Curso 2023/2024                                                                                -
+ --------------------------------------------------------------------------------------------------
+ - Licencia:                                                                                      -
+ - Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)     -
+ -     • Atribución (BY): El licenciante permite a otros distribuir, remezclar, retocar y crear a -
+ -                        partir de  su obra, incluso con  fines comerciales, siempre y cuando se -
+ -                        reconozca   la autoría  de   la   obra  original de    manera adecuada. -
+ -     • No Comercial (NC): El licenciante permite a otros copiar, distribuir, mostrar y ejecutar -
+ -                          la obra,  así como hacer obras derivadas basadas en ella, pero no con -
+ -                          fines comerciales. Si desean utilizar  la obra con fines comerciales, -
+ -                          necesitarán       obtener        permiso       del       licenciante. -
+ -     • Compartir Igual (SA): Si se remezcla, transforma o se crea a partir de la obra original, -
+ -                             la nueva  obra generada debe    ser distribuida bajo  una licencia -
+ -                             idéntica                             a                       ésta. -
+ --------------------------------------------------------------------------------------------------
+ - ESTE SOFTWARE ES PROPORCIONADO POR LOS TITULARES DE LOS DERECHOS DE AUTOR Y LOS CONTRIBUYENTES -
+ - "TAL CUAL"  Y CUALQUIER GARANTÍA EXPRESA O   IMPLÍCITA,  INCLUYENDO,  PERO NO  LIMITADA A, LAS -
+ - GARANTÍAS   IMPLÍCITAS  DE COMERCIABILIDAD   Y   APTITUD PARA UN  PROPÓSITO  PARTICULAR QUEDAN -
+ - RECHAZADAS.  EN NINGÚN CASO EL TITULAR DE LOS   DERECHOS DE  AUTOR O  LOS CONTRIBUYENTES SERÁN -
+ - RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL,  EJEMPLAR O CONSECUENTE -
+ - (INCLUYENDO, PERO NO LIMITADO A, LA  ADQUISICIÓN DE BIENES O SERVICIOS  SUSTITUTOS; PÉRDIDA DE -
+ - USO,  DATOS O  BENEFICIOS; O  INTERRUPCIÓN  DE  NEGOCIOS) SIN IMPORTAR LA CAUSA Y EN CUALQUIER -
+ - TEORÍA DE RESPONSABILIDAD, YA SEA EN CONTRATO,  RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO -
+ - NEGLIGENCIA O DE OTRO MODO) QUE SURJA DE CUALQUIER MANERA DEL USO DE ESTE SOFTWARE, INCLUSO SI -
+ - SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. -
+ -------------------------------------------------------------------------------------------------->
+<?php
+    session_start();
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+
+    if(isset($_SESSION['usuario'])) { //Si el usuario está logeado, se dirige al Dashboard
+        header("Location: ./dashboard.php");
+        exit(0);
+    }
+?>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="SIGEcAT: Software de Gestión Económica Alquileres Turísticos.">
+        <meta name="keywords" content="SIGEcAT, gestión, alquileres, economía, turismo">
+        <meta name="author" content="Alberto A. Alsina Ambrós (IES Joan Coromines)">
+        <meta name="robots" content="noindex, nofollow">
+        
+        <title>SIGEcAT - Login</title>
+        
+        <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+        <link rel="stylesheet" href="styles/index.css">
+        </head>
+    <body>
+        <div class="login-container">
+            <h2>Identificación</h2>
+            <?php
+            // Ver si se ha intentado loguear y ha habido un fallo, para mostrar el aviso de error
+            if (isset($_GET['login']) && $_GET['login'] == 'failed') {
+                echo '<div style="color: red; margin-bottom: 10px;">Login inválido. Inténtelo de nuevo.</div>';
+            }
+            ?>
+            <form action="php/usuario/login.php" method="post" class="login-form">
+                <div class="input-container">
+                    <input type="text" name="dni" placeholder="NIF" autocomplete="username" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="pass" placeholder="Contraseña" autocomplete="current-password" required>
+                </div>
+                <div class="input-container">
+                    <input id="boton-login" type="submit" value="Iniciar sesión">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

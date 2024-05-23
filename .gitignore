@@ -1,0 +1,6 @@
+# Ignorar el contenido de la carpeta logs, pero no la carpeta en sí
+logs/*
+!logs/
+
+# Ignorar la carpeta testing
+testing/

@@ -1,0 +1,320 @@
+/**************************************************************************************************
+ * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
+ * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * Alumno: Alberto A. Alsina Ambrós                                                               *
+ * Tutor: Jordan Llorach Beltrán                                                                  *
+ * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
+ * Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (CFGS DAW)                 *
+ * Curso 2023/2024                                                                                *
+ **************************************************************************************************
+ * Licencia:                                                                                      *
+ * Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)     *
+ *     • Atribución (BY): El licenciante permite a otros distribuir, remezclar, retocar y crear a *
+ *                        partir de  su obra, incluso con  fines comerciales, siempre y cuando se *
+ *                        reconozca   la autoría  de   la   obra  original de    manera adecuada. *
+ *     • No Comercial (NC): El licenciante permite a otros copiar, distribuir, mostrar y ejecutar *
+ *                          la obra,  así como hacer obras derivadas basadas en ella, pero no con *
+ *                          fines comerciales. Si desean utilizar  la obra con fines comerciales, *
+ *                          necesitarán       obtener        permiso       del       licenciante. *
+ *     • Compartir Igual (SA): Si se remezcla, transforma o se crea a partir de la obra original, *
+ *                             la nueva  obra generada debe    ser distribuida bajo  una licencia *
+ *                             idéntica                             a                       ésta. *
+ **************************************************************************************************
+ * ESTE SOFTWARE ES PROPORCIONADO POR LOS TITULARES DE LOS DERECHOS DE AUTOR Y LOS CONTRIBUYENTES *
+ * "TAL CUAL"  Y CUALQUIER GARANTÍA EXPRESA O   IMPLÍCITA,  INCLUYENDO,  PERO NO  LIMITADA A, LAS *
+ * GARANTÍAS   IMPLÍCITAS  DE COMERCIABILIDAD   Y   APTITUD PARA UN  PROPÓSITO  PARTICULAR QUEDAN *
+ * RECHAZADAS.  EN NINGÚN CASO EL TITULAR DE LOS   DERECHOS DE  AUTOR O  LOS CONTRIBUYENTES SERÁN *
+ * RESPONSABLES POR NINGÚN DAÑO DIRECTO, INDIRECTO, INCIDENTAL, ESPECIAL,  EJEMPLAR O CONSECUENTE *
+ * (INCLUYENDO, PERO NO LIMITADO A, LA  ADQUISICIÓN DE BIENES O SERVICIOS  SUSTITUTOS; PÉRDIDA DE *
+ * USO,  DATOS O  BENEFICIOS; O  INTERRUPCIÓN  DE  NEGOCIOS) SIN IMPORTAR LA CAUSA Y EN CUALQUIER *
+ * TEORÍA DE RESPONSABILIDAD, YA SEA EN CONTRATO,  RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO *
+ * NEGLIGENCIA O DE OTRO MODO) QUE SURJA DE CUALQUIER MANERA DEL USO DE ESTE SOFTWARE, INCLUSO SI *
+ * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
+ **************************************************************************************************/
+
+/* Aplicar box-sizing a todos los elementos */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+#botones {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#usuario {
+    padding: 20px;
+}
+
+.sidebar h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.boton-sidebar {
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #666;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 80px;
+}
+
+#boton-logout {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding: 20px;
+}
+
+.boton-sidebar:hover {
+    background-color: #555;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+.main-content p {
+    font-size: 24px;
+    padding: 0;
+}
+
+#cerrar-sesion {
+    padding: 10px;
+    color: white;
+    background-color: #cc0000;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+#cerrar-sesion:hover {
+    background-color: #ff3333;
+}
+
+#cerrar-sesion:active {
+    background-color: #990000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-bottom: auto;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px dotted #ccc;
+}
+
+th {
+    background-color: #f4f4ec;
+    color: #333;
+    position: sticky;
+    top: 0;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td:last-child, th:last-child {
+    border-right: none;
+}
+
+.empty-row {
+    height: 20px;
+    background-color: #fff;
+}
+
+.empty-row td {
+    border: none;
+}
+
+#top-bar {
+    align-items: flex-end;
+    background-color: #333;
+    display: flex;
+    padding: 0 20px;
+    width: 100%;
+    height: 35px;
+    flex-direction: row-reverse;
+    box-sizing: border-box;
+}
+
+.boton-topbar {
+    height: 35px;
+    background-color: #fafafa;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#cuerpo {
+    flex-grow: 1;
+    background-color: #f4f4ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+}
+
+
+.popup-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px 60px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: auto;
+    max-width: 75%;
+    min-width: 40%;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.popup input, .popup textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.icon-pointer {
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+#mod-perfil {
+    color: #ccc;
+    cursor: pointer;
+}
+
+#formulario_cambios {
+    padding: 10px 30px 50px 30px;
+    border-radius: 40px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+#footnote {
+    color: #aaa;
+    font-size: 15px;
+}
+
+#headertrimestral {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    flex: 0 1 10%; /* Ocupa hasta el 15% del contenedor */
+    border-bottom: 1px solid #333;
+    font-size: 15px;
+}
+
+#headertrimestral p {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+
+#headertrimestral div {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+}
+
+#tabla_trimestral {
+    display: inherit;
+    flex-direction: column;
+    width: 100%;
+    flex: 1 1 auto;
+    height: 100%;
+}
