@@ -82,6 +82,9 @@
                 </div>
                 <div id="boton-logout">
                     <button class="boton-logout" id="cerrar-sesion" type="button">Cerrar sesión</button>
+                    <div id="version">
+                        <p>SIGEcAT - Versión 1.0.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
+                    </div>
                 </div>
             </div>
             <div class="main-content">

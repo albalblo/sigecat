@@ -91,7 +91,7 @@ body, html {
     display: flex;
     flex-direction: column;
     margin-top: auto;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
 }
 
 .boton-sidebar:hover {
@@ -317,4 +317,20 @@ td:last-child, th:last-child {
     width: 100%;
     flex: 1 1 auto;
     height: 100%;
+}
+
+#version p {
+    text-align: center;
+    font-size: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #bbb;
+}
+
+#version a:link, #version a:visited, #version a:hover {
+    color: #bbb;
+
+}
+
+#version a:active {
+    color: #fff;
 }
