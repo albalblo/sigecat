@@ -342,11 +342,3 @@ function generarPDF() {
         jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' } // En portrait la tabla no queda bien, demasiados datos
     });
 }
-
-// Para seleccionar todas las checkboxes de la pantalla si se selecciona la "master"
-function toggleCheckboxes(source) {
-    checkboxes = document.querySelectorAll('.rowCheckbox');
-    for(var i = 0, n = checkboxes.length; i < n; i++) {
-        checkboxes[i].checked = source.checked;
-    }
-}

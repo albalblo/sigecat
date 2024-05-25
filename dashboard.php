@@ -108,6 +108,14 @@
                 </div>
             </div>
         </div>
+        <script>
+            function toggleCheckboxes(source) {
+                checkboxes = document.querySelectorAll('.rowCheckbox');
+                for(var i = 0, n = checkboxes.length; i < n; i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+            }
+        </script>
         <script src="script/dashboard.js" type="module"></script>
     </body>
 </html>
