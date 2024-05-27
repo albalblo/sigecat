@@ -47,12 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $empresa_id = filter_input(INPUT_POST, 'empresa_id', FILTER_VALIDATE_INT);
 
         if(verificar_entidad($mysqli, "gastos", $gasto_id) && verificar_entidad($mysqli, 'empresa',  $empresa_id)) {
-            $gasto_interno = (isset($_POST['gasto_interno']) && $_POST['gasto_interno'] == 0) ? 0 : 1;
+            $gasto_interno = (isset($_POST['gasto_interno']) && $_POST['gasto_interno'] == 1) ? 1 : 0;
             $fecha_gasto = trim($mysqli->real_escape_string($_POST['fecha_gasto']));
             $concepto = (isset($_POST['concepto'])) ? trim($mysqli->real_escape_string($_POST['concepto'])) : "";
-            $nif_proveedor = ($gasto_interno == 0) ? "" : strtoupper(trim($mysqli->real_escape_string($_POST['nif_proveedor']))); // Este NIF puede ser el de una sociedad, por lo que no se hará una verificación del mismo a través de verificar_dni()
             $total_gasto = isset($_POST['total_gasto']) ? abs(filter_input(INPUT_POST, 'total_gasto', FILTER_VALIDATE_FLOAT)) : 0;
             $pagado = 0;
+
+            if($gasto_interno) {
+                $nif_proveedor = NULL;
+            } else {
+                if (isset($_POST['nif_proveedor'])) {
+                    $nif_proveedor = trim(strtoupper($mysqli->real_escape_string($_POST['nif_proveedor'])));
+                } else {
+                    $continuar = false;
+                }
+            }
         
             $fecha = date('Y-m-d');
           

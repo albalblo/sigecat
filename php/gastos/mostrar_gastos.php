@@ -100,8 +100,8 @@ if($stmt) {
                             <tbody>";
         
             while ($row = $result->fetch_assoc()) {
-                $tipo_gasto = $row["gasto_interno"] == 0 ? "Interno" : "Externo";
-                $total = ($row['gasto_interno'] == 0) ? $row['total_gasto'] : $row['total_gasto'] * 1.21;
+                $tipo_gasto = $row["gasto_interno"] == 1 ? "Interno" : "Externo";
+                $total = ($row['gasto_interno'] == 1) ? $row['total_gasto'] : $row['total_gasto'] * 1.21;
                 $icon_pagado = ($row['pagado'] == 1) ? "../icons/check.ico" : "../icons/cross.ico";
         
                 $fecha_ok = $row["fecha"];
@@ -113,7 +113,7 @@ if($stmt) {
                                 <p><b>Fecha del gasto:</b> " . $fecha_ok . "</p>
                                 <p><b>Tipo de gasto:</b> " . $tipo_gasto . "</p>";
 
-                if ($row["gasto_interno"] == 0) {
+                if ($row["gasto_interno"] == 1) {
                     $datos_popup .= "<p><b>NIF del proveedor:</b> " . $row["nif_proveedor"] . "</p>
                                     <p><b>Total del gasto sin IVA:</b> " . $row["total_gasto"] .  "</p>
                                     <p><b>IVA: 21%</b></p>
@@ -140,7 +140,7 @@ if($stmt) {
                                 <td>' . $row['nif_proveedor'] . '</td>
                                 <td>' . $row['total_gasto'] . '</td>';
 
-                $mensaje .= $row['gasto_interno'] == 0 ? '<td>21%</td>' : '<td></td>';
+                $mensaje .= $row['gasto_interno'] == 1 ? '<td>0%</td>' : '<td>21%</td>';
                 $mensaje .= '   <td>' . $total . '€</td>
                                 <td style="text-align: center;"><img src="' . $icon_pagado . '"></td>
                                 <td style="text-align: center;"><img src="../icons/info.ico" class="info-icon icon-pointer"></td>

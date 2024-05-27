@@ -45,9 +45,9 @@ function trimestral_gastos($row_gastos) {
     $tipo_gasto = $row_gastos['gasto_interno'] == 0 ? "interno<br />" : "externo<br />";
     $nif_prov = $row_gastos['gasto_interno'] == 0 ? "" : "NIF del proveedor: " . $row_gastos['nif_proveedor'] . "<br />";
     $pag = $row_gastos['pagado'] == 0 ? "<b>Gasto no pagado</b>" : "";
-    $total_gasto = $row_gastos['gasto_interno'] == 1 ? ceil($row_gastos['total_gasto'] * 1.21) : $row_gastos['total_gasto'];
+    $total_gasto = $row_gastos['gasto_interno'] == 1 ? $row_gastos['total_gasto'] : ceil($row_gastos['total_gasto'] * 1.21);
     $iva_aplicado = $total_gasto - $row_gastos['total_gasto'];
-    $iva = $row_gastos['gasto_interno'] == 0 ? "0" : "21";
+    $iva = $row_gastos['gasto_interno'] == 1 ? "0" : "21";
 
     $fecha_ok = $row_gastos["fecha"];
     $fecha_ok = date('d-m-Y', strtotime($fecha_ok));

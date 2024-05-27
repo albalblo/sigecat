@@ -48,42 +48,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(verificar_entidad($mysqli, "empresa", $empresa_id)) {
             $fecha_gasto = trim($mysqli->real_escape_string($_POST['fecha_gasto']));
             $concepto = trim($mysqli->real_escape_string($_POST['concepto']));
-            $gasto_interno = isset($_POST['gasto_interno']) ? 1 : 0;
-            $nif_proveedor = trim(strtoupper($mysqli->real_escape_string($_POST['nif_proveedor'])));
+            $gasto_interno = (isset($_POST['gasto_interno']) && $_POST['gasto_interno'] == 1) ? 1 : 0;
             $gasto_sin_iva = isset($_POST['gasto_sin_iva']) ? abs(filter_input(INPUT_POST, 'gasto_sin_iva', FILTER_VALIDATE_FLOAT)) : 0;
             $empresa_id = filter_input(INPUT_POST, 'empresa_id', FILTER_VALIDATE_INT);
             $pagado = isset($_POST['pagado']) ? 1 : 0;
             $fecha = date('Y-m-d');
-        
-            if((is_numeric($gasto_sin_iva)) && ($gasto_sin_iva >= 0) && ($gasto_sin_iva <= 9999999.99)) {
-                if ($gasto_interno == 0) {
-                    $query = "INSERT INTO gastos (empresa_id, gasto_interno, fecha, nif_proveedor, total_gasto, pagado, fecha_creacion, fecha_ultima_modificacion, concepto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $continuar = true;
+
+            if($gasto_interno) {
+                $nif_proveedor = NULL;
+            } else {
+                if (isset($_POST['nif_proveedor'])) {
+                    $nif_proveedor = trim(strtoupper($mysqli->real_escape_string($_POST['nif_proveedor'])));
+                } else {
+                    $continuar = false;
+                }
+            }
+
+            if($continuar) {
+                if((is_numeric($gasto_sin_iva)) && ($gasto_sin_iva >= 0) && ($gasto_sin_iva <= 9999999.99)) {
+                    $query = "INSERT INTO gastos   (empresa_id,
+                                                    gasto_interno,
+                                                    fecha,
+                                                    nif_proveedor,
+                                                    total_gasto,
+                                                    pagado,
+                                                    fecha_creacion,
+                                                    fecha_ultima_modificacion,
+                                                    concepto)
+                                    VALUES         (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $params = "iissdisss";
                     $campos = [$empresa_id, $gasto_interno, $fecha_gasto, $nif_proveedor, $gasto_sin_iva, $pagado, $fecha, $fecha, $concepto];
-        
-                } else {
-                    $query = "INSERT INTO gastos (empresa_id, gasto_interno, fecha, total_gasto, pagado, fecha_creacion, fecha_ultima_modificacion, concepto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    $params = "iisdisss";
-                    $campos = [$empresa_id, $gasto_interno, $fecha_gasto, $gasto_sin_iva, $pagado, $fecha, $fecha, $concepto];
-                }
 
-                $stmt = $mysqli->prepare($query);
+                    $stmt = $mysqli->prepare($query);
 
-                if($stmt) {
-                    $stmt->bind_param($params, ...$campos);
-                    if($stmt->execute()) {
-                        $mensaje = "Nuevo gasto registrado con éxito.";
+                    if($stmt) {
+                        $stmt->bind_param($params, ...$campos);
+                        if($stmt->execute()) {
+                            $mensaje = "Nuevo gasto registrado con éxito.";
+                        } else {
+                            $mensaje = "Error interno del servidor, inténtelo de nuevo más tarde";
+                            loguear_error("insert_gastos", $stmt->error);
+                        }
+                        $stmt->close();
+                        } else {
+                            $mensaje = "Error interno del servidor, inténtelo de nuevo más tarde";
+                            loguear_error("insert_gastos", $mysqli->error);
+                        }
                     } else {
-                        $mensaje = "Error interno del servidor, inténtelo de nuevo más tarde";
-                        loguear_error("insert_gastos", $stmt->error);
+                        $mensaje = "Error en los datos introducidos";
                     }
-                    $stmt->close();
-                    } else {
-                        $mensaje = "Error interno del servidor, inténtelo de nuevo más tarde";
-                        loguear_error("insert_gastos", $mysqli->error);
-                    }
-                } else {
-                    $mensaje = "Error en los datos introducidos";
                 }
         } else {
             $mensaje = "Error en la empresa introducida";
