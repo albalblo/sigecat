@@ -42,8 +42,8 @@ require_once '../funciones/log_errores.php';    // Logueo de los mensajes de err
 // Funciones solo para este archivo
 function trimestral_gastos($row_gastos) {
     $gastos_array = [];
-    $tipo_gasto = $row_gastos['gasto_interno'] == 0 ? "interno<br />" : "externo<br />";
-    $nif_prov = $row_gastos['gasto_interno'] == 0 ? "" : "NIF del proveedor: " . $row_gastos['nif_proveedor'] . "<br />";
+    $tipo_gasto = $row_gastos['gasto_interno'] == 1 ? "interno<br />" : "externo<br />";
+    $nif_prov = $row_gastos['gasto_interno'] == 1 ? "" : "NIF del proveedor: " . $row_gastos['nif_proveedor'] . "<br />";
     $pag = $row_gastos['pagado'] == 0 ? "<b>Gasto no pagado</b>" : "";
     $total_gasto = $row_gastos['gasto_interno'] == 1 ? $row_gastos['total_gasto'] : ceil($row_gastos['total_gasto'] * 1.21);
     $iva_aplicado = $total_gasto - $row_gastos['total_gasto'];
