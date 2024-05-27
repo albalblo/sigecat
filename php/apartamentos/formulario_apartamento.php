@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -40,23 +40,25 @@ require_once '../funciones/listar.php';     // Funciones de visualización
 echo '  <div id="formulario_cambios">
             <h2>Añadir Apartamento</h2>
             <form id="formApartamento" style="display: block;" method="post" action="/php/apartamentos/insert_apartamento.php">
-                <label for="nombre">Nombre del Apartamento:</label>
+                <label for="nombre">Nombre del Apartamento:*</label>
                     <input type="text" id="nombre" name="nombre" maxlength="255" placeholder="Nombre del Apartamento" required>
                 <br /><br />
-                <label for="direccion">Dirección:</label>
+                <label for="direccion">Dirección:*</label>
                     <input type="text" id="direccion" name="direccion" maxlength="255" placeholder="Dirección" required>
                 <br /><br />
-                <label for="precio_noche">Precio por noche:</label>
+                <label for="precio_noche">Precio por noche:*</label>
                     <input type="number" step="0.01" id="precio_noche" name="precio_noche" placeholder="Precio por Noche" min="0" max="9999.99" required> 
                 <br /><br />
-                <label for="empresa_id">Empresa:</label>
+                <label for="empresa_id">Empresa:*</label>
                     <select id="empresa_id" name="empresa_id">' .
                         listar_empresas($mysqli) .
                     '</select>
                 <br /><br /> 
                 <label for="comentario">Comentarios:</label> 
                     <textarea id="comentario" name="comentario" maxlength="255" placeholder="Comentario"></textarea> 
-                <br /><br />
+                    <br />
+                    <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                    <br /><br />
                 <button type="submit">Registrar</button> 
             </form>
         </div>';

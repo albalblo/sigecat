@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -49,7 +49,7 @@ if(isset($_SESSION['usuario'])) { //Si el usuario no está logeado, se vuelve al
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
     $ip = $_SERVER['REMOTE_ADDR']; // IP del usuario
-    $mensaje_error = "[".$fecha."][".$hora."] - Error en el logout de ".$dni." desde [".$ip."].";
+    $mensaje_error = "[".$fecha."][".$hora."] - Error en el logout de ".$dni." desde [".$ip."]\n";
 
     $logFile = '../../logs/error.log';
     file_put_contents($logFile, $mensaje_error, FILE_APPEND | LOCK_EX);
@@ -58,7 +58,7 @@ if(isset($_SESSION['usuario'])) { //Si el usuario no está logeado, se vuelve al
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
     $ip = $_SERVER['REMOTE_ADDR']; // IP del usuario
-    $mensaje_logout = "[".$fecha."][".$hora."] - Logout correcto de ".$dni." desde [".$ip."].";
+    $mensaje_logout = "[" . $fecha . "][" . $hora . "] - Logout correcto de " . $dni . " desde [" . $ip . "]\n";
 
     $logFile = '../../logs/access.log';
     file_put_contents($logFile, $mensaje_logout, FILE_APPEND | LOCK_EX);

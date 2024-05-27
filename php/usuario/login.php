@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -65,7 +65,7 @@ if (isset($_SESSION['usuario'])) { // Si el usuario ya está logeado, se redirig
 } 
 
 if (isset($_POST['dni']) && isset($_POST['pass'])) {
-    $dni = trim($_POST['dni']);
+    $dni = trim(strtoupper($_POST['dni']));
     $submittedPassword = $_POST['pass'];
     
     // Para proteger contra inyecciones de SQL, usaré 'statements'
@@ -99,7 +99,7 @@ if (isset($_POST['dni']) && isset($_POST['pass'])) {
                     $fecha = date('Y-m-d');
                     $hora = date('H:i:s');
                     $ip = $_SERVER['REMOTE_ADDR'];                        // IP del usuario
-                    $mensaje_login = "[".$fecha."][".$hora."] - Login correcto de ".$dni.". desde [".$ip."].";
+                    $mensaje_login = "[" . $fecha . "][" . $hora . "] - Login correcto de " . $dni . " desde [" . $ip . "]\n";
 
                     $logFile = '../../logs/access.log';
                     file_put_contents($logFile, $mensaje_login, FILE_APPEND | LOCK_EX);

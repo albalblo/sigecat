@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -76,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $apellidos_cliente = trim($mysqli->real_escape_string($_POST['apellidos_cliente']));
     $nif_cliente = trim($mysqli->real_escape_string($_POST['nif_cliente']));
     $tel_cliente = trim($mysqli->real_escape_string($_POST['tel_cliente']));
-    $correo_cliente = trim($mysqli->real_escape_string($_POST['correo_cliente']));
-    $num_personas = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);
+    $correo_cliente = trim(filter_input(INPUT_POST, 'correo_cliente', FIILTER_SANITIZE_EMAIL));
+    $correo_cliente = filter_var($correo_cliente, FILTER_VALIDATE_EMAIL);    $num_personas = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);
     $descuento = abs(filter_input(INPUT_POST, 'descuento', FILTER_VALIDATE_FLOAT));
     $tarifa_id = filter_input(INPUT_POST, 'tarifa_id', FILTER_VALIDATE_INT);
     $intermediario_id = $_POST['intermediario_id'] != 0 ? trim($mysqli->real_escape_string($_POST['intermediario_id'])) : "000000000";
@@ -160,6 +160,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if (!$intermediario_registrado) {
         $mensaje = "Permisos insuficientes";
     }
+
+    if(!($correo_cliente === false)) {
+        $continuar = false;
+    }
+
     if ($continuar) {
 
         if(apartamento_libre($mysqli, $apartamento_id, $fecha_entrada, $fecha_salida)) {

@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -53,7 +53,7 @@ if ($row = $result->fetch_assoc()) {
     echo '  <div id="formulario_cambios">
                 <h2>Modificar usuario</h2>  
                 <form id="updateUsuarioForm" method="post" action="/php/usuario/update_usuario.php">
-                    <label for="nombre">Nombre:</label>
+                    <label for="nombre">Nombre:*</label>
                         <input type="text" id="nombre" name="nombre" value="'.$row["nombre"].'" length="255" placeholder="Nombre" required>
                         <br /><br/>
                     <label for="apellidos">Apellidos:</label>
@@ -67,9 +67,11 @@ if ($row = $result->fetch_assoc()) {
                         <br /><br/>
                         <br /><br/>
                         <br /><br/>
-                    <label for="password">Contraseña actual:</label>
+                    <label for="password">Contraseña actual:*</label>
                         <input type="password" id="password" name="password" placeholder="Contraseña actual" required>
-                        <br /><br/>
+                        <br />
+                        <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                        <br /><br />
                     <button type="submit">Modificar datos de usuario</button>
                 </form>
             </div>';

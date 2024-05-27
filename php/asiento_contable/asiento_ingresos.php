@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -118,15 +118,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mensaje .= "   <td>".$row['id']."</td>
                                         <td>".$row["nombre_empresa"]."</td>";
                     }
-                    $mensaje .= "   <td>".$row["nombre"]."</td>
-                                    <td>".$row["comentario"]."</td>
-                                    <td>".$row["fecha_entrada"]."</td>
-                                    <td>".$row["fecha_salida"]."</td>
-                                    <td>".$row["precio_noche"]."€</td>
-                                    <td>".$row["nombre_cliente"]."</td>
-                                    <td>".$row["nombre_tarifa"]." (".$row["tarifa"]."x)</td>
-                                    <td>".$row["descuento"]."%</td>
-                                    <td>".$precio_apartamento."€</td>
+                    $fecha_entrada_ok = $row["fecha_entrada"];
+                    $fecha_entrada_ok = date('d-m-Y', strtotime($fecha_entrada_ok));
+                    $fecha_salida_ok = $row["fecha_salida"];
+                    $fecha_salida_ok = date('d-m-Y', strtotime($fecha_salida_ok));
+
+                    $mensaje .= "   <td>" . $row["nombre"] . "</td>
+                                    <td>" . $row["comentario"] . "</td>
+                                    <td>" . $fecha_entrada_ok . "</td>
+                                    <td>" . $fecha_salida_ok . "</td>
+                                    <td>" . $row["precio_noche"] . "€</td>
+                                    <td>" . $row["nombre_cliente"] . "</td>
+                                    <td>" . $row["nombre_tarifa"] . " (".$row["tarifa"]."x)</td>
+                                    <td>" . $row["descuento"] . "%</td>
+                                    <td>" . $precio_apartamento . "€</td>
                                 </tr>";
                 }
                 $mensaje .= "</tbody></table>";

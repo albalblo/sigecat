@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -111,27 +111,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $mensaje = '    <div id="formulario_cambios">
                                             <h2>Modificar Gasto</h2>  
                                             <form id="updateGastoForm" method="post" action="/php/gastos/update_gasto.php">
-                                                <label for="concepto">Concepto:</label>
+                                                <label for="concepto">Concepto:*</label>
                                                     <input type="text" id="concepto" name="concepto" value="' . $concepto_muestra . '" placeholder="Concepto" required>
                                                     <br /><br/>
-                                                <label for="fecha_gasto">Fecha del gasto:</label>
+                                                <label for="fecha_gasto">Fecha del gasto:*</label>
                                                     <input type="date" id="fecha_gasto" name="fecha_gasto" value="' . $fecha_gasto . '" required>
                                                     <br /><br/>
-                                                <label for="total_gasto">Gasto sin IVA:</label>
+                                                <label for="total_gasto">Total del gasto sin IVA:*</label>
                                                     <input type="number" step="0.01" id="total_gasto" name="total_gasto" value="' . htmlspecialchars($row["total_gasto"]) . '" placeholder="Gasto sin IVA" min="0" max="9999.99" required>
                                                     <br /><br/>
-                                                <label for="gasto_interno">Gasto interno:
+                                                <label for="gasto_interno">Gasto interno:</label>
                                                     <input type="checkbox" id="gasto_interno" name="gasto_interno" value="1" ' . $gasto_interno_checkbox . ' />
                                                     <br /><br />
                                                 <label for="nif_proveedor">NIF del proveedor:</label>
-                                                    <input type="text" id="nif_proveedor" name="nif_proveedor" value="' . $proveedor_muestra . '" placeholder="NIF del proveedor" />
+                                                    <input type="text" id="nif_proveedor" name="nif_proveedor" pattern="[0-9A-Za-z][0-9]{7}[0-9A-Za-z]" value="' . $proveedor_muestra . '" placeholder="NIF del proveedor" />
                                                     <br /><br/>
                                                 <label for="pagado">Gasto pagado:</label>
                                                     <input type="checkbox" id="pagado" name="pagado" value="1" ' . $pagado_checkbox . ' />
                                                     <br /><br />
-                                                <label for="empresa_id">Empresa:</label>
+                                                <label for="empresa_id">Empresa:*</label>
                                                     <select id="empresa_id" name="empresa_id">' . listar_empresas($mysqli) . '</select>
-                                                    <br /><br/>
+                                                    <br />
+                                                    <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                                                    <br /><br />
                                                 <input type="hidden" name="gasto_id" value="' . $gasto_id . '">
                                                 <button type="submit">Modificar</button>
                                             </form>

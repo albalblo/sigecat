@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -69,7 +69,7 @@ if($stmt) {
         $mensaje = "<table>
                         <thead>
                             <tr>
-                                <th><input type='checkbox' class='selectAllGastos' onclick='toggleCheckboxes(this)'></th>"; // Checkbox maestra: al seleccionarla o deselecionarla, cambian todas
+                            <th><input type='checkbox' class='selectAllGastos' onclick='toggleCheckboxes(this)'></th>"; // Checkbox maestra: al seleccionarla o deselecionarla, cambian todas
         
         if ($_SESSION['es_root']) {
             $mensaje.= "<th>ID</th><th>Empresa</th>";
@@ -87,20 +87,25 @@ if($stmt) {
             while ($row = $result->fetch_assoc()) {
                 $mensaje .= "   <tr>
                                     <td>
-                                    <input type='checkbox' class='rowCheckbox' value='".$row['id']."'></td>";
+                                    <input type='checkbox' class='rowCheckbox' value='" . $row['id'] . "'></td>";
                 if ($_SESSION['es_root'] == 1) {
                     $mensaje .= "   <td>".$row["id"]."</td>
                                     <td>".$row["nombre_empresa"]."</td>";
                 }
-                $mensaje .= "   <td>".$row["concepto"]."</td>
-                                <td>".$row["fecha"]."</td>
-                                <td>".$row["nif_proveedor"]."</td>
-                                <td>-".$row['total_gasto']."€</td>
+                $fecha_ok = $row["fecha"];
+                $fecha_ok = date('d-m-Y', strtotime($fecha_ok));
+
+                $mensaje .= "   <td>" . $row["concepto"] . "</td>
+                                <td>" . $fecha_ok . "</td>
+                                <td>" . $row["nif_proveedor"] . "</td>
+                                <td>-" . $row['total_gasto'] . "€</td>
                             </tr>";
             }
-            echo "</tbody></table>";
+            $mensaje .= "   </tbody>
+                        </table>
+                       ";
         } else {
-            echo "No hay datos disponibles.";
+            $mensaje .= "No hay datos disponibles.";
         }
     } else {
         $mensaje .= "Ha habido un error, inténtelo de nuevo más tarde..";

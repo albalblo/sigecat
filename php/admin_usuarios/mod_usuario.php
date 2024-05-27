@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br />
                                                 ' . $nif . '
                                                 <br /><br />
-                                            <label for="nombre">Nombre:</label>
+                                            <label for="nombre">Nombre:*</label>
                                                 <br />
                                                 <input type="text" id="nombre" name="nombre" maxlength"255" value="' . $row['nombre'] . '" required>
                                                 <br /><br />
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br />
                                                 <input type="text" id="apellidos" name="apellidos" maxlength"255" value="' . $row['apellidos'] . '">
                                                 <br /><br />
-                                            <label for="empresa_id">Empresa:</label>
+                                            <label for="empresa_id">Empresa:*</label>
                                                 <br />
                                                 <select id="empresa_id" name="empresa_id" required>' .
                                                     listar_empresas($mysqli) .
@@ -89,6 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br /><br />
                                             <label for="es_admin">Administrador de la empresa:</label>
                                             <input type="checkbox" id="es_admin" name="es_admin" value="1" ' . $admin_check . ' >
+                                            <br />
+                                            <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
                                             <br /><br />
                                             <input type="hidden" id="nif" name="nif" value="' . $nif . '">
                                             <input type="submit" value="Actualizar">

@@ -67,7 +67,7 @@
             ?>
             <form action="php/usuario/login.php" method="post" class="login-form">
                 <div class="input-container">
-                    <input type="text" name="dni" placeholder="NIF" autocomplete="username" required>
+                    <input type="text" name="dni" placeholder="NIF" pattern="[0-9]{8}[A-Za-z]" autocomplete="username" required>
                 </div>
                 <div class="input-container">
                     <input type="password" name="pass" placeholder="Contraseña" autocomplete="current-password" required>
@@ -76,7 +76,7 @@
                     <input id="boton-login" type="submit" value="Iniciar sesión">
                 </div>
                 <div id="version">
-                    <p>SIGEcAT - Versión 1.0.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
+                    <p>SIGEcAT - Versión 1.0.2<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
                 </div>
             </form>
         </div>

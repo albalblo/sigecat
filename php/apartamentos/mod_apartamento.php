@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -107,21 +107,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $mensaje = '<div id="formulario_cambios">
                                         <h2>Modificar Apartamento</h2>  
                                         <form id="updateApartamentoForm" method="post" action="/php/apartamentos/update_apartamento.php">
-                                            <label for="nombre">Nombre:</label>
+                                            <label for="nombre">Nombre:*</label>
                                                 <input type="text" id="nombre" name="nombre" maxlength="255" value="' . htmlspecialchars($row["nombre"]) . '" placeholder="Nombre" required>
                                                 <br /><br/>
-                                            <label for="direccion">Dirección:</label>
+                                            <label for="direccion">Dirección:*</label>
                                                 <input type="text" id="direccion" name="direccion" maxlength="255" value="' . htmlspecialchars($row["direccion"]) . '" placeholder="Dirección" required>
                                                 <br /><br/>
-                                            <label for="precio_noche">Precio por noche:</label>
+                                            <label for="precio_noche">Precio por noche:*</label>
                                                 <input type="number" step="0.01" id="precio_noche" name="precio_noche" value="' . htmlspecialchars($row["precio_noche"]) . '" placeholder="Precio por noche" min="0" max="9999.99" required>
                                                 <br /><br/>
-                                            <label for="empresa_id">Empresa:</label>
+                                            <label for="empresa_id">Empresa:*</label>
                                                 <select id="empresa_id" name="empresa_id">' . listar_empresas($mysqli) . '</select>
                                                 <br /><br /> 
                                             <label for="comentario">Comentario:</label>
                                                 <textarea id="comentario" name="comentario" placeholder="Comentario..." maxlength="255">' . htmlspecialchars($row['comentario']) . '</textarea>
-                                                <br /><br/>
+                                                <br />
+                                                <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                                                <br /><br />
                                                 <br /><br/>
                                                 <input type="hidden" name="apartamento_id" value="' . $apartamento_id . '">
                                             <button type="submit">Modificar</button>

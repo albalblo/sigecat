@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -114,20 +114,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mensaje .= '   <div id="formulario_cambios">
                                         <h2>Añadir Ingreso</h2>
                                         <form id="formIngreso" style="display: block;" method="post" action="/php/ingresos/update_ingreso.php">
-                                            <label for="apartamento_id">Apartamento:</label>
+                                            <label for="apartamento_id">Apartamento:*</label>
                                                 <select id="apartamento_id" name="apartamento_id">' .
                                                     listar_apartamentos($mysqli, $row['apartamento_id']) .
                                                 '</select>
                                                 <br /><br />
-                                            <label for="fecha_entrada">Fecha de entrada:</label>
+                                            <label for="fecha_entrada">Fecha de entrada:*</label>
                                                 <br />
                                                 <input type="date" id="fecha_entrada" name="fecha_entrada" value="' . $row['fecha_entrada'] . '" required>
                                                 <br /><br />
-                                            <label for="fecha_salida">Fecha de salida:</label>
+                                            <label for="fecha_salida">Fecha de salida:*</label>
                                                 <br />
                                                 <input type="date" id="fecha_salida" name="fecha_salida" value="' . $row['fecha_salida'] . '" required>
                                                 <br /><br />
-                                            <label for="nombre_cliente">Nombre del cliente:</label>
+                                            <label for="nombre_cliente">Nombre del cliente:*</label>
                                                 <br />
                                                 <input type="text" id="nombre_cliente" name="nombre_cliente" maxlength="255" placeholder="Nombre del cliente" value="' . $row['nombre_cliente'] . '" required>
                                                 <br /><br />
@@ -135,27 +135,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br />    
                                                 <input type="text" id="apellidos_cliente" name="apellidos_cliente" maxlength="255" placeholder="Apellidos del cliente" value="' . $row['apellidos_cliente'] . '">
                                                 <br /><br />
-                                            <label for="nif_cliente">NIF del cliente:</label>
+                                            <label for="nif_cliente">NIF del cliente:*</label>
                                                 <br />
                                                 <input type="text" id="nif_cliente" name="nif_cliente" maxlength="9" placeholder="NIF del cliente" value="' . $row['nif_cliente'] . '" required>
                                                 <br /><br />
-                                            <label for="tel_cliente">Teléfono del cliente:</label>
+                                            <label for="tel_cliente">Teléfono del cliente:*</label>
                                                 <br />
                                                 <input type="text" id="tel_cliente" name="tel_cliente" maxlength="15" placeholder="Teléfono del cliente" value="' . $row['tel_cliente'] . '" required>
                                                 <br /><br />
-                                            <label for="correo_cliente">Correo del cliente:</label>
+                                            <label for="correo_cliente">Correo del cliente:*</label>
                                                 <br />
                                                 <input type="text" id="correo_cliente" name="correo_cliente" maxlength="255" placeholder="Correo del cliente" value="' . $row['correo_cliente'] . '" required>
                                                 <br /><br />
-                                            <label for="num_clientes">Número de personas en la casa:</label>
+                                            <label for="num_clientes">Número de personas en la casa:*</label>
                                                 <br />
                                                 <input type="number" step="1" id="num_clientes" name="num_clientes" placeholder="Número de personas" min="1" max="100" value ="1" value="' . $row['num_personas'] . '" required> 
                                                 <br /><br />
-                                            <label for="descuento">Descuento a aplicar:</label>
+                                            <label for="descuento">Descuento a aplicar:*</label>
                                                     <br />
                                                 <input type="number" step="0.01" id="descuento" name="descuento" placeholder="Descuento" min="0" max="100" value="0" value="' . $row['descuento'] . '" required>% 
                                                 <br /><br />
-                                            <label for="tarifa_id">Tarifa a aplicar:</label>
+                                            <label for="tarifa_id">Tarifa a aplicar:*</label>
                                                 <br />
                                                 <select id="tarifa_id" name="tarifa_id">' .
                                                         listar_tarifas($mysqli, $row['tarifa']) .
@@ -170,6 +170,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <label for="comentario">Comentarios:</label> 
                                                 <br />
                                                 <textarea id="comentario" name="comentario" maxlength="255" placeholder="Comentario">' . $row['comentario'] . '</textarea> 
+                                                <br />
+                                                <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
                                                 <br /><br />
                                             <input type="hidden" id="ingreso_id" name="ingreso_id" value="' . $ingreso_id . '">
                                             <button type="submit">Registrar</button> 

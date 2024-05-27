@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fecha_gasto = trim($mysqli->real_escape_string($_POST['fecha_gasto']));
             $concepto = trim($mysqli->real_escape_string($_POST['concepto']));
             $gasto_interno = isset($_POST['gasto_interno']) ? 1 : 0;
-            $nif_proveedor = trim($mysqli->real_escape_string($_POST['nif_proveedor']));
+            $nif_proveedor = trim(strtoupper($mysqli->real_escape_string($_POST['nif_proveedor'])));
             $gasto_sin_iva = isset($_POST['gasto_sin_iva']) ? abs(filter_input(INPUT_POST, 'gasto_sin_iva', FILTER_VALIDATE_FLOAT)) : 0;
             $empresa_id = filter_input(INPUT_POST, 'empresa_id', FILTER_VALIDATE_INT);
             $pagado = isset($_POST['pagado']) ? 1 : 0;

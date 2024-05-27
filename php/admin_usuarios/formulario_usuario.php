@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -42,7 +42,7 @@ echo '  <div id="formulario_cambios">
             <form id="formUsuario" style="display: block;" method="post" action="/php/admin_usuarios/insert_usuario.php">
                 <label for="nif">NIF:*</label>
                     <br />
-                    <input type="text" id="nif" name="nif" maxlength"9" placeholder="DNI del usuario" required>
+                    <input type="text" id="nif" name="nif" maxlength"9" pattern="[0-9A-Za-z][0-9]{7}[A-Za-z]" placeholder="DNI del usuario" required>
                     <br /><br />
                 <label for="nombre">Nombre:*</label>
                     <br />
@@ -67,10 +67,10 @@ echo '  <div id="formulario_cambios">
                     '</select>
                     <br /><br />
                 <label for="es_admin">Administrador de la empresa:</label>
-                <input type="checkbox" id="es_admin" name="es_admin" value="1">
-                <br />
-                <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
-                <br /><br />
+                    <input type="checkbox" id="es_admin" name="es_admin" value="1">
+                    <br />
+                    <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                    <br /><br />
                 <input type="submit" value="Registrar">
             </form>
         </div>';

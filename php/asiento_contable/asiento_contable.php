@@ -1,7 +1,7 @@
 <?php
 /**************************************************************************************************
  * Proyecto de Fin de Ciclo Formativo de Grado Superior                                           *
- * 'Software de Gestión Económica Alquileres Turísticos' (SIGEcAT)                                *
+ * 'Sistema Integral de Gestión Económica Alquileres Turísticos' (SIGEcAT)                        *
  * Alumno: Alberto A. Alsina Ambrós                                                               *
  * Tutor: Jordan Llorach Beltrán                                                                  *
  * Centro formativo: IES Joan Coromines (Benicarló, España)                                       *
@@ -47,8 +47,11 @@ function obtener_datos_gastos($row_gastos) {
         $gastos_string .= " <td>" . $row_gastos['id'] . "</td>
                             <td>" . $row_gastos["nombre_empresa"] . "</td>";
     }
+    $fecha_ok = $row_gastos["fecha"];
+    $fecha_ok = date('d-m-Y', strtotime($fecha_ok));
+
     $gastos_string .= " <td>" . $row_gastos["concepto"] . "</td>
-                        <td>" . $row_gastos["fecha"] . "</td>
+                        <td>" . $fecha_ok . "</td>
                         <td></td>
                         <td style='text-align: right;'>-" . $row_gastos['total_gasto'] . "€</td>";
     $gastos_array = [$gastos_string, $row_gastos['total_gasto']];
@@ -64,8 +67,10 @@ function obtener_datos_ingresos($row_ingresos) {
         $ingresos_string .= "   <td>" . $row_ingresos['id'] . "</td>
                                 <td>" . $row_ingresos["nombre_empresa"]."</td>";
     }
+    $fecha_ok = $row_ingresos["fecha"];
+    $fecha_ok = date('d-m-Y', strtotime($fecha_ok));
     $ingresos_string .= "   <td>" . $row_ingresos["concepto"] . "</td>
-                            <td>" . $row_ingresos["fecha"] . "</td>
+                            <td>" . $fecha_ok . "</td>
                             <td style='text-align: right;'>" . $precio_apartamento . "€</td>
                             <td></td>";
     $ingresos_array = [$ingresos_string, $precio_apartamento];
