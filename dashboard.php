@@ -63,7 +63,7 @@
         <div class="dashboard-container">
             <div class="sidebar">
                 <div id="usuario">
-                    <img src="/icons/logo.png" width="64px"></img>
+                    <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit" width="64px"></img>
                     <?php
                         echo "<h1>".$_SESSION['nombre']." ".$_SESSION['apellidos']."</h1>";
                     ?>
