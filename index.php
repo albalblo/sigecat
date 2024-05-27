@@ -79,7 +79,7 @@
                     <input id="boton-login" type="submit" value="Iniciar sesión">
                 </div>
                 <div id="version">
-                    <p>SIGEcAT - Versión 1.0.2<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
+                    <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
                 </div>
             </form>
         </div>
