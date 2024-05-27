@@ -51,13 +51,13 @@
         <meta name="author" content="Alberto A. Alsina Ambrós (IES Joan Coromines)">
         <meta name="robots" content="noindex, nofollow">
         
-        <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit"></img>
         <title>SIGEcAT - Login</title>
         
         <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
         <link rel="stylesheet" href="styles/index.css">
         </head>
     <body>
+        <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit"></img>
         <div class="login-container">
             <h2>Identificación</h2>
             <?php
