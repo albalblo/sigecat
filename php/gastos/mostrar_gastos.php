@@ -135,13 +135,10 @@ if($stmt) {
                     $mensaje .= '   <td>' . $row['id'] . '</td>
                                     <td>' . $row['nombre_empresa'] . '</td>';
                 }
-
-                $gasto = $row['gasto_interno'] == 1 ? $row['total_gasto'] : $row['total_gasto'] * 1.21;
-
                 $mensaje .= '   <td>' . $row['concepto'] . '</td>
                                 <td>' . $fecha_ok . '</td>
                                 <td>' . $row['nif_proveedor'] . '</td>
-                                <td>' . $gasto . '</td>';
+                                <td>' . $row['total_gasto'] . '</td>';
 
                 $mensaje .= $row['gasto_interno'] == 1 ? '<td>0%</td>' : '<td>21%</td>';
                 $mensaje .= '   <td>' . $total . '€</td>
