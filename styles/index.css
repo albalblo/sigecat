@@ -52,11 +52,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: -50px; /* Ajusta este valor según sea necesario */
+    margin-bottom: -50px;
+    z-index: 10;
 }
 
 .logo-container img {
-    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+    width: 100px;
     height: auto;
 }
 
