@@ -113,7 +113,7 @@ if($stmt) {
                                 <p><b>Fecha del gasto:</b> " . $fecha_ok . "</p>
                                 <p><b>Tipo de gasto:</b> " . $tipo_gasto . "</p>";
 
-                if ($row["gasto_interno"] == 1) {
+                if ($row["gasto_interno"]) {
                     $datos_popup .= "<p><b>NIF del proveedor:</b> " . $row["nif_proveedor"] . "</p>
                                     <p><b>Total del gasto sin IVA:</b> " . $row["total_gasto"] .  "</p>
                                     <p><b>IVA: 21%</b></p>
@@ -135,10 +135,13 @@ if($stmt) {
                     $mensaje .= '   <td>' . $row['id'] . '</td>
                                     <td>' . $row['nombre_empresa'] . '</td>';
                 }
+
+                $gasto = $row['gasto_interno'] == 1 ? $row['total_gasto'] : $row['total_gasto'] * 1.21;
+
                 $mensaje .= '   <td>' . $row['concepto'] . '</td>
                                 <td>' . $fecha_ok . '</td>
                                 <td>' . $row['nif_proveedor'] . '</td>
-                                <td>' . $row['total_gasto'] . '</td>';
+                                <td>' . $gasto . '</td>';
 
                 $mensaje .= $row['gasto_interno'] == 1 ? '<td>0%</td>' : '<td>21%</td>';
                 $mensaje .= '   <td>' . $total . '€</td>
