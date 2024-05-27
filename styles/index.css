@@ -31,8 +31,7 @@
  * NEGLIGENCIA O DE OTRO MODO) QUE SURJA DE CUALQUIER MANERA DEL USO DE ESTE SOFTWARE, INCLUSO SI *
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
-
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -42,10 +41,23 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4ec;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -50px; /* Ajusta este valor según sea necesario */
+}
+
+.logo-container img {
+    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+    height: auto;
 }
 
 .login-container {
@@ -54,10 +66,10 @@ body {
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     width: 30%;
+    text-align: center;
 }
 
 h2 {
-    text-align: center;
     color: #333;
     padding: 30px;
 }
@@ -97,7 +109,6 @@ input[type="submit"]:focus {
 }
 
 #version p {
-    text-align: center;
     font-size: 10px;
     font-family: 'Courier New', Courier, monospace;
     color: #333;
@@ -105,7 +116,6 @@ input[type="submit"]:focus {
 
 #version a:link, #version a:visited, #version a:hover {
     color: #333;
-
 }
 
 #version a:active {

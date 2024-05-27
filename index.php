@@ -57,7 +57,9 @@
         <link rel="stylesheet" href="styles/index.css">
         </head>
     <body>
-        <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit"></img>
+        <div class="logo-container">
+            <img src="/icons/logo.png" width="100px" alt="SIGEcAT logo - A minimalist cat in a suit">
+        </div>
         <div class="login-container">
             <h2>Identificación</h2>
             <?php
