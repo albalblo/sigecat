@@ -33,8 +33,8 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 $mensaje = "";
@@ -74,12 +74,14 @@ if($_SESSION['es_admin'] || $_SESSION['es_root']) {
                                 </thead>
                                 <tbody>";
 
+                // Solamente los administradores pueden ver los usuarios de su empresa, por lo que no es necesario hacer una verificación de permisos a la hora
+                // de mostrar los iconos de editar y eliminar, como en el resto de entidades
                 $edit_icon = "../icons/edit.ico";
                 $trash_icon = "../icons/trash.ico";
-    
+
                 while ($row = $result->fetch_assoc()) {
                         $admin_icon = $row['es_admin'] == 1 ? "../icons/check.ico" : "../icons/cross.ico";
-    
+
                         $mensaje .= "   <tr>
                                             <td>" . $row["dni"] . "</td>
                                             <td>" . $row["nombre"] . " " . $row["apellidos"] . "</td>

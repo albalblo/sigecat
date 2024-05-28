@@ -37,21 +37,22 @@ require_once '../funciones/con_db.php';     // Conexión con la base de datos
 require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
 require_once '../funciones/listar.php';     // Funciones de visualización
 
-echo '  <div id="formulario_cambios">
-            <h2>Liquidación trimestral del IVA</h2>
-            <form id="formIVA" style="display: block;">
-                <label for="fecha_liquidacion">Fecha de la Liquidación:</label>
-                    <br />
-                    <input type="date" class="fecha_formulario" id="fecha_liquidacion" name="fecha_liquidacion" value="2024-01-01" required>
-                    <br /><br />
-                <label for="empresa_id">Empresa:</label>
-                    <br />
-                    <select id="empresa_id" name="empresa_id">' .
-                        listar_empresas($mysqli) .
-                    '</select>
-                    <br /><br /><br />
-                <button type="button" class="formIVA">Registrar</button> 
-            </form>
-        </div>';
+$mensaje = '    <div id="formulario_cambios">
+                    <h2>Liquidación trimestral del IVA</h2>
+                    <form id="formIVA" style="display: block;">
+                        <label for="fecha_liquidacion">Fecha de la Liquidación:</label>
+                            <br />
+                            <input type="date" class="fecha_formulario" id="fecha_liquidacion" name="fecha_liquidacion" value="2024-01-01" required>
+                            <br /><br />
+                        <label for="empresa_id">Empresa:</label>
+                            <br />
+                            <select id="empresa_id" name="empresa_id">' .
+                                listar_empresas($mysqli) .
+                            '</select>
+                            <br /><br /><br />
+                        <button type="button" class="formIVA">Registrar</button> 
+                    </form>
+                </div>';
 
+echo $mensaje;
 $mysqli->close();

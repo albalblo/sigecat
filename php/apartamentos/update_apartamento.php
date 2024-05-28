@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $empresa_id = filter_input(INPUT_POST, 'empresa_id', FILTER_VALIDATE_INT);
         $comentario = isset($_POST['comentario']) ? trim($mysqli->real_escape_string($_POST['comentario'])) : "";
         $fecha = date('Y-m-d');
-    
+
         $es_root = $_SESSION['es_root'];
         $es_admin = $_SESSION['es_admin'];
         $empresa_id_user = $_SESSION['empresa_id'];
@@ -81,12 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             comentario = ?, 
                                             fecha_ultima_modificacion = ?
                                     WHERE   id = ?";
-    
+
                         $stmt = $mysqli->prepare($query);
 
                         if($stmt) {
                             $stmt->bind_param("ssdissi", $nombre, $direccion, $precio_noche, $empresa_id, $comentario, $fecha, $apartamento_id);
-    
+
                             if ($stmt->execute()) {
                                 $mensaje = "Apartamento actualizado con éxito.";
                             } else {
@@ -110,10 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $mensaje .= "Error en los datos introducidos";
     }
-        
+
     $mysqli->close();
     echo "  <script>
                 alert('" . $mensaje . "');
                 window.location.href='../../dashboard.php';
             </script>";
+
 }

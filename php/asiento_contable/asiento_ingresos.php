@@ -33,10 +33,10 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
-require_once '../funciones/listar.php';     // Funciones de visualización
-require_once '../funciones/verificar.php';  // Funciones de verificación
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
+require_once '../funciones/listar.php';         // Funciones de visualización
+require_once '../funciones/verificar.php';      // Funciones de verificación
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_gastos = $_POST['ids'];
         $id_gastos_str = implode(", ", $id_gastos);
     } else {
-        $id_gastos_str = "0"; // Es un autonumérico, por lo que nunca será 0. Así, si es 0, en la lógica de más tarde sé que no se ha seleccionado ningún gasto para el asiento contable
+        $id_gastos_str = "0"; // Es un autonumérico, por lo que nunca será 0. Así, si es 0, en la lógica de más tarde se sabrá que no se ha seleccionado ningún gasto para el asiento contable
     }
 
     $mensaje = '<input type="checkbox" class="rowCheckbox" id="inline" value="' . $id_gastos_str . '" checked disabled style="display: none;">'; // Los IDs de los gastos se recibirán como en una checkbox más
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($stmt->execute()) {
             $result = $stmt->get_result();
             $precio_apartamento = 0;
-        
+
             $mensaje .= "   <table>
                                 <thead>
                                     <tr>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tr>
                     </thead>
                     <tbody>";
-        
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $precio_apartamento = $row['num_noches'] * $row['precio_noche'] * $row['tarifa'];
@@ -149,4 +149,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo $mensaje;
     $mysqli->close();
+
 }

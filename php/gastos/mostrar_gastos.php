@@ -91,6 +91,7 @@ if($stmt) {
                             <th></th>
                             <th style='display: none;'></th>";
 
+            // Solo los administradores verán las columnas de edición y modificación
             if ($_SESSION['es_admin']) {
                 $mensaje .= "<th colspan='2'></th>";
             }

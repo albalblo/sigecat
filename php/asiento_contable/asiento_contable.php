@@ -33,10 +33,10 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
-require_once '../funciones/listar.php';     // Funciones de visualización
-require_once '../funciones/verificar.php';  // Funciones de verificación
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
+require_once '../funciones/listar.php';         // Funciones de visualización
+require_once '../funciones/verificar.php';      // Funciones de verificación
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 // Funciones solo utilizadas en este archivo
@@ -191,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <tbody>";
             
             // Se mostrarán los gastos y los ingresos ordenados por la fecha de ejecución. En los ingresos esta será la fecha de entrada
+            // Los gastos tendrán preferencia por los ingresos de forma arbitraria
             if (($result_gastos->num_rows > 0) || ($result_ingresos->num_rows > 0)) {
                 $total_gastos = 0.0;
                 $total_ingresos = 0.0;

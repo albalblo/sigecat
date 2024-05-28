@@ -35,9 +35,11 @@
 
 session_start();
 
-// Muestra de errores, solamente para modo desarrollador
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// Muestra de errores, solamente para modo desarrollador.
+// Como config.php se carga en todos los archivos, descomentar estas instrucciones permite rastrear errores en toda la aplicación,
+// sin necesidad de activarlos en unos o en otros
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 // Si el usuario no está logeado, se vuelve al login
 if(!isset($_SESSION['usuario'])) {

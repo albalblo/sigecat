@@ -60,12 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("s", $nif);
                 if($stmt->execute()) {
                     $result = $stmt->get_result();
-        
+
                     if($result->num_rows > 0) {
                         $row = $result->fetch_assoc();
-            
+
                         $admin_check = $row['es_admin'] == 1 ? 'checked' : '';
-            
+
+                        // No se contempla la opción de modificar el NIF de un usuario, ya que es su identificador legal. Si se ha producido un error
+                        // en el registro por parte del administrador, se debe eliminar el usuario y este debe ser recreado
                         $mensaje = '<div id="formulario_cambios">
                                         <h2>Modificar usuario</h2>
                                         <form id="formUsuario" style="display: block;" method="post" action="/php/admin_usuarios/update_usuario.php">
@@ -96,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <input type="submit" value="Actualizar">
                                         </form>
                                     </div>';
-            
+
                     } else {
                         $mensaje .= 'Error al recuperar el usuario<br />';
                     }

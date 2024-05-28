@@ -77,7 +77,7 @@ if($stmt) {
             if ($_SESSION['es_root'] == 1) {
                 $mensaje.= "<th>Empresa</th>";
             }
-            
+        
             $mensaje .= "   <th>Nombre</th>
                             <th>Dirección</th>
                             <th>Precio Noche</th>
@@ -85,7 +85,7 @@ if($stmt) {
                             <th>Comentario</th>
                             <th style='text-align: center;'>Libre</th>
                             <th></th>";
-            
+
             if ($_SESSION['es_admin'] == 1) {
                 $mensaje .= "<th colspan='2'></th>";
             }
@@ -98,7 +98,7 @@ if($stmt) {
                 $libre_icon = $libre ? "../icons/check.ico" : "../icons/cross.ico";
                 $edit_icon = "../icons/edit.ico";
                 $trash_icon = "../icons/trash.ico";
-        
+
                 $mensaje .= "<tr>";
                 if ($_SESSION['es_root'] == 1) { // Como el usuario root ve todos los apartamentos, debe ver de qué empresa es cada uno
                     $mensaje .= "<td>" . $row["nombre_empresa"] . "</td>";

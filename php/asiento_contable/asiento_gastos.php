@@ -33,10 +33,8 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
-require_once '../funciones/listar.php';     // Funciones de visualización
-require_once '../funciones/verificar.php';  // Funciones de verificación
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 $mensaje = "";

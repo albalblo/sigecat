@@ -35,8 +35,6 @@
 
 require_once '../funciones/con_db.php';         // Conexión con la base de datos
 require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
-require_once '../funciones/listar.php';         // Funciones de visualización
-require_once '../funciones/verificar.php';      // Funciones de verificación
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $continuar = true;
 
+        // En este caso, la verificación de que existe y la verificación de permisos van unidas, por lo que no
+        // se ha utilizado la función de verificar_entidad
         if($_SESSION['usuario'] == $usuario_id) {
           $mensaje .= "No se puede eliminar el propio usuario.";
           $continuar = false;
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 }
                             } else {
                                 $continuar = false;
-                                $mensaje .= "Ha habido un error, inténtelo de nuevo más tarde..";
+                                $mensaje .= "Ha habido un error, inténtelo de nuevo más tarde.";
                                 loguear_error("eliminar_usuario", $stmt_confirmar_usuario->error);
                             }
                             $stmt_confirmar_usuario->close();
@@ -81,11 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mensaje .= "Error en el servidor, inténtelo de nuevo más tarde.";
                             $continuar = false;
                         }
-
-                        
                     } else {
                         $continuar = false;
-                        $mensaje .= "Ha habido un error, inténtelo de nuevo más tarde..";
+                        $mensaje .= "Ha habido un error, inténtelo de nuevo más tarde.";
                         loguear_error("eliminar_usuario", $mysqli->error);
                     }
                 } else {

@@ -33,9 +33,9 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
-require_once '../funciones/verificar.php';  // Funciones de verificación
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
+require_once '../funciones/verificar.php';      // Funciones de verificación
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -99,6 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensaje .= "Error en la verificación de datos.";
         }
 
+        // Para evitar problemas graves, como que un administrador elimine sus propios derechos de administrador,
+        // no se contempla que los usuarios se puedan editar a sí mismos desde aquí
         if($dni == $_SESSION['usuario']) {
             $continuar = false;
             $mensaje .= "Edite su usuario desde su panel de usuario.";

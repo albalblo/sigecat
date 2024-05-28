@@ -36,41 +36,42 @@ require_once '../funciones/con_db.php';     // Conexión con la base de datos
 require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
 require_once '../funciones/listar.php';     // Funciones de visualización
 
-echo '  <div id="formulario_cambios">
-            <h2>Añadir Gasto</h2>
-            <form id="formGasto" style="display: block;" method="post" action="/php/gastos/insert_gastos.php">
-                <label for="concepto">Concepto:*</label>
-                    <br />
-                    <input type="text" id="concepto" name="concepto" maxlength="255" placeholder="Concepto..." required>
-                    <br /><br />
-                <label for="fecha_gasto">Fecha del gasto:*</label>
-                    <br />
-                    <input type="date" class="fecha_formulario" id="fecha_gasto" name="fecha_gasto" value="2024-01-01" required>
-                    <br /><br />
-                <label for="gasto_sin_iva">Total del gasto sin IVA:*</label>
-                    <br />
-                    <input type="number" step="0.01" id="gasto_sin_iva" name="gasto_sin_iva" min="0.01" max="9999999.99" placeholder="Gasto sin IVA" required>
-                    <br /><br />
-                <label for="gasto_interno">Gasto interno:</label>
-                    <input type="checkbox" name="gasto_interno" id="gasto_interno" value="1">
-                    <br /><br />
-                <label for="nif_proveedor">NIF del proveedor (si aplica):</label>
-                    <br />
-                    <input type="text" id="nif_proveedor" name="nif_proveedor" maxlength="9" pattern="[0-9A-Za-z][0-9]{7}[0-9A-Za-z]" placeholder="NIF del proveedor">
-                    <br /><br />
-                <label for="pagado">Gasto ya pagado:</label>
-                    <input type="checkbox" name="pagado" id="pagado" value="1">
-                    <br /><br />
-                <label for="empresa_id">Empresa:*</label>
-                    <br />
-                    <select id="empresa_id" name="empresa_id">' .
-                        listar_empresas($mysqli) .
-                    '</select>
-                    <br />
-                    <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
-                    <br /><br />
-                <button type="submit">Registrar</button> 
-            </form>
-        </div>';
+$mensaje = '    <div id="formulario_cambios">
+                    <h2>Añadir Gasto</h2>
+                    <form id="formGasto" style="display: block;" method="post" action="/php/gastos/insert_gastos.php">
+                        <label for="concepto">Concepto:*</label>
+                            <br />
+                            <input type="text" id="concepto" name="concepto" maxlength="255" placeholder="Concepto..." required>
+                            <br /><br />
+                        <label for="fecha_gasto">Fecha del gasto:*</label>
+                            <br />
+                            <input type="date" class="fecha_formulario" id="fecha_gasto" name="fecha_gasto" value="2024-01-01" required>
+                            <br /><br />
+                        <label for="gasto_sin_iva">Total del gasto sin IVA:*</label>
+                            <br />
+                            <input type="number" step="0.01" id="gasto_sin_iva" name="gasto_sin_iva" min="0.01" max="9999999.99" placeholder="Gasto sin IVA" required>
+                            <br /><br />
+                        <label for="gasto_interno">Gasto interno:</label>
+                            <input type="checkbox" name="gasto_interno" id="gasto_interno" value="1">
+                            <br /><br />
+                        <label for="nif_proveedor">NIF del proveedor (si aplica):</label>
+                            <br />
+                            <input type="text" id="nif_proveedor" name="nif_proveedor" maxlength="9" pattern="[0-9A-Za-z][0-9]{7}[0-9A-Za-z]" placeholder="NIF del proveedor">
+                            <br /><br />
+                        <label for="pagado">Gasto ya pagado:</label>
+                            <input type="checkbox" name="pagado" id="pagado" value="1">
+                            <br /><br />
+                        <label for="empresa_id">Empresa:*</label>
+                            <br />
+                            <select id="empresa_id" name="empresa_id">' .
+                                listar_empresas($mysqli) .
+                            '</select>
+                            <br />
+                            <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                            <br /><br />
+                        <button type="submit">Registrar</button> 
+                    </form>
+                </div>';
 
 $mysqli->close();
+echo $mensaje;

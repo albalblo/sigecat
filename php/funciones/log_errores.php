@@ -35,6 +35,8 @@
 
 require_once 'config.php';
 
+// Esta función loguea en un archivo los errores que han ocurrido y el lugar, para poder rastrearlos
+
 function loguear_error($loc, $err) {
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');

@@ -33,6 +33,12 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
+/**************************************************************************************************
+ * Estas funciones listan los contenidos de una tabla en forma de <option> para introducirlos en  *
+ * contenedores <select>  de formularios HTML. Todas  siguen  el mismo esqueleto clave, donde el  *
+ * nombre       o   descripción    oculta         el      identificador    en          la tabla.  *
+ **************************************************************************************************/
+
 function listar_empresas($mysqli) {
     $query_empresas = "SELECT id, nombre FROM empresa";
     if ($_SESSION['es_root'] == 0) {

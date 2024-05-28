@@ -89,6 +89,8 @@ if($stmt) {
                 $mensaje .= "<th>ID</th>";
             }
             $mensaje .= "<th>Apartamento</th><th>Cliente</th><th>Fecha de entrada</th><th>Fecha de salida</th><th>Precio</th><th>Tarifa</th><th>Descuento</th><th>Comentario</th><th></th>";
+
+            // Solo los administradores verán las columnas de edición y modificación
             if ($_SESSION['es_admin']) {
                 $mensaje .= "<th colspan='2'></th>";
             }
@@ -159,5 +161,5 @@ if($stmt) {
     loguear_error("mostrar_ingresos", $mysqli->error);
 }
 
-echo $mensaje;
 $mysqli->close();
+echo $mensaje;

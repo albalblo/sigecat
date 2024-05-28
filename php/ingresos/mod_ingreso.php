@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $empresa_id = $_SESSION['empresa_id'];
         $permiso = true;
         $mensaje = "";
-    
+
         //Verificación de permisos
         if(!$_SESSION['es_root']) {
             if($_SESSION['es_admin']){
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if($stmt_prueba->execute()) {
                         $result_prueba = $stmt_prueba->get_result();
                         $empresa_id_db = $result_prueba->fetch_assoc();
-            
+
                         if($empresa_id_db == NULL){
                             $mensaje = "Ha habido un error.";
                             $permiso = false;
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $permiso = false;
             }
         }
-    
+
         if($permiso) {
             $query = "SELECT    i.apartamento_id,
                                 i.fecha_entrada,
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 i.tarifa,
                                 i.intermediario_id,
                                 i.comentario
-    
+
                       FROM      ingresos AS i
                       JOIN      apartamento AS a
                             ON  a.id = i.apartamento_id
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if($stmt->execute()) {
                     $result = $stmt->get_result();
                     $row = $result->fetch_assoc();          
-        
+
                     $mensaje .= '   <div id="formulario_cambios">
                                         <h2>Añadir Ingreso</h2>
                                         <form id="formIngreso" style="display: block;" method="post" action="/php/ingresos/update_ingreso.php">
@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $mensaje = 'Ha habido un error en el ingreso seleccionado';
     }
-    
+
     $mysqli->close();
     echo $mensaje;
 

@@ -133,4 +133,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert('" . $mensaje . "');
                 window.location.href='../../dashboard.php';
             </script>";
+
 }

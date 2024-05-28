@@ -33,10 +33,10 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';      // Conexión con la base de datos
-require_once '../funciones/config.php';      // Configuración de la página y verificación de sesión
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
 require_once '../funciones/verificar.php';      // Funciones de verificación
-require_once '../funciones/log_errores.php';      // Configuración de la página y verificación de sesión
+require_once '../funciones/log_errores.php';    // Configuración de la página y verificación de sesión
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -172,4 +172,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert('" . $mensaje . "');
                 window.location.href='../../dashboard.php';
             </script>";
+
 }

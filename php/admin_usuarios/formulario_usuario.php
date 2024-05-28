@@ -37,42 +37,44 @@
  require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
  require_once '../funciones/listar.php';     // Funciones de visualización
 
-echo '  <div id="formulario_cambios">
-            <h2>Añadir usuario</h2>
-            <form id="formUsuario" style="display: block;" method="post" action="/php/admin_usuarios/insert_usuario.php">
-                <label for="nif">NIF:*</label>
-                    <br />
-                    <input type="text" id="nif" name="nif" maxlength"9" pattern="[0-9A-Za-z][0-9]{7}[A-Za-z]" placeholder="DNI del usuario" required>
-                    <br /><br />
-                <label for="nombre">Nombre:*</label>
-                    <br />
-                    <input type="text" id="nombre" name="nombre" maxlength"255" placeholder="Nombre del usuario" required>
-                    <br /><br />
-                <label for="apellidos">Apellidos:</label>
-                    <br />
-                    <input type="text" id="apellidos" name="apellidos" maxlength"255" placeholder="Apellidos">
-                    <br /><br />
-                <label for="password">Contraseña:*</label>
-                    <br />
-                    <input type="password" id="password" name="password" maxlength"20" placeholder="Contraseña" required>
-                    <br /><br />
-                <label for="password_confir">Confirmar contraseña:*</label>
-                    <br />
-                    <input type="password" id="password_confir" name="password_confir" maxlength"20" placeholder="Confirmar contraseña" required>
-                    <br /><br />
-                <label for="empresa_id">Empresa:*</label>
-                    <br />
-                    <select id="empresa_id" name="empresa_id">' .
-                        listar_empresas($mysqli) .
-                    '</select>
-                    <br /><br />
-                <label for="es_admin">Administrador de la empresa:</label>
-                    <input type="checkbox" id="es_admin" name="es_admin" value="1">
-                    <br />
-                    <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
-                    <br /><br />
-                <input type="submit" value="Registrar">
-            </form>
-        </div>';
+$mensaje=  '    <div id="formulario_cambios">
+                    <h2>Añadir usuario</h2>
+                    <form id="formUsuario" style="display: block;" method="post" action="/php/admin_usuarios/insert_usuario.php">
+                        <label for="nif">NIF:*</label>
+                            <br />
+                            <input type="text" id="nif" name="nif" maxlength"9" pattern="[0-9A-Za-z][0-9]{7}[A-Za-z]" placeholder="DNI del usuario" required>
+                            <br /><br />
+                        <label for="nombre">Nombre:*</label>
+                            <br />
+                            <input type="text" id="nombre" name="nombre" maxlength"255" placeholder="Nombre del usuario" required>
+                            <br /><br />
+                        <label for="apellidos">Apellidos:</label>
+                            <br />
+                            <input type="text" id="apellidos" name="apellidos" maxlength"255" placeholder="Apellidos">
+                            <br /><br />
+                        <label for="password">Contraseña:*</label>
+                            <br />
+                            <input type="password" id="password" name="password" maxlength"20" placeholder="Contraseña" required>
+                            <br /><br />
+                        <label for="password_confir">Confirmar contraseña:*</label>
+                            <br />
+                            <input type="password" id="password_confir" name="password_confir" maxlength"20" placeholder="Confirmar contraseña" required>
+                            <br /><br />
+                        <label for="empresa_id">Empresa:*</label>
+                            <br />
+                            <select id="empresa_id" name="empresa_id">' .
+                                listar_empresas($mysqli) .
+                            '</select>
+                            <br /><br />
+                        <label for="es_admin">Administrador de la empresa:</label>
+                            <input type="checkbox" id="es_admin" name="es_admin" value="1">
+                            <br />
+                            <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                            <br /><br />
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>';
 
 $mysqli->close();
+
+echo $mensaje;

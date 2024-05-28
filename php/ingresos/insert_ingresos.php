@@ -68,7 +68,7 @@ function apartamento_libre($mysqli, $apartamento, $fentrada, $fsalida) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mensaje = "";
 
-    // Sanitización y validación de entradas
+    // Saneamiento y validación de las entradas de POST
     $apartamento_id = filter_input(INPUT_POST, 'apartamento_id', FILTER_VALIDATE_INT);
     $fecha_entrada = trim($mysqli->real_escape_string($_POST['fecha_entrada']));
     $fecha_salida = trim($mysqli->real_escape_string($_POST['fecha_salida']));
@@ -104,8 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $empresa_id = $row_empresa['empresa_id'];
     $stmt_empresa->close();
 
-
-    
     // Verificar intermediario
     if ($intermediario_id != "0") {
         $query_intermediario = 'SELECT  intermediario_id
@@ -211,8 +209,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo '<script>alert("'.$mensaje.'"); window.location.href="../../dashboard.php";</script>';
+    $mysqli->close();
+    echo '  <script>
+                alert("' . $mensaje . '");
+                window.location.href="../../dashboard.php";
+            </script>';
 }
 
-//header("Location: ../../dashboard.php");
-?>
