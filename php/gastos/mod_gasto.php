@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <input type="text" id="concepto" name="concepto" value="' . $concepto_muestra . '" placeholder="Concepto" required>
                                                     <br /><br/>
                                                 <label for="fecha_gasto">Fecha del gasto:*</label>
-                                                    <input type="date" id="fecha_gasto" name="fecha_gasto" value="' . $fecha_gasto . '" required>
+                                                    <input type="date" class="fecha_formulario" id="fecha_gasto" name="fecha_gasto" value="' . $fecha_gasto . '" required>
                                                     <br /><br/>
                                                 <label for="total_gasto">Total del gasto sin IVA:*</label>
                                                     <input type="number" step="0.01" id="total_gasto" name="total_gasto" value="' . htmlspecialchars($row["total_gasto"]) . '" placeholder="Gasto sin IVA" min="0" max="9999.99" required>

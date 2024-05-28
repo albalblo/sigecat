@@ -40,15 +40,15 @@ echo '    <div id="formulario_cambios">
             <h2>Añadir Ingreso</h2>
             <form id="formIngreso" style="display: block;" method="post" action="/php/ingresos/insert_ingresos.php">
                 <label for="apartamento_id">Apartamento:*</label>
-                    <select id="apartamento_id" name="apartamento_id">' .
+                    <select id="apartamento_id" name="apartamento_id" onchange="updateMaxPersonas()">' .
                         listar_apartamentos($mysqli) .
                     '</select>
                     <br /><br />
                 <label for="fecha_entrada">Fecha de entrada:*</label>
-                    <input type="date" id="fecha_entrada" name="fecha_entrada" required>
+                    <input class="fecha_formulario" type="date" id="fecha_entrada" name="fecha_entrada" required>
                     <br /><br />
                 <label for="fecha_salida">Fecha de salida:*</label>
-                    <input type="date" id="fecha_salida" name="fecha_salida" required>
+                    <input class="fecha_formulario" type="date" id="fecha_salida" name="fecha_salida" required>
                     <br /><br />
                 <label for="nombre_cliente">Nombre del cliente:*</label>
                     <input type="text" id="nombre_cliente" name="nombre_cliente" maxlength="255" placeholder="Nombre del cliente" required>
@@ -66,7 +66,7 @@ echo '    <div id="formulario_cambios">
                     <input type="text" id="correo_cliente" name="correo_cliente" maxlength="255" placeholder="Correo del cliente" required>
                     <br /><br />
                 <label for="num_clientes">Número de personas en la casa:*</label>
-                    <input type="number" step="1" id="num_clientes" name="num_clientes" placeholder="Número de personas" min="1" max="100" value ="1" required> 
+                    <input type="number" step="1" id="num_clientes" name="num_clientes" placeholder="Número de personas" min="1" max="2" value ="1" required> 
                     <br /><br />
                 <label for="descuento">Descuento a aplicar:*</label>
                     <input type="number" step="0.01" id="descuento" name="descuento" placeholder="Descuento" min="0" max="100" value="0" required>% 

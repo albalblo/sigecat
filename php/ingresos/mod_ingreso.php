@@ -88,22 +88,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     
         if($permiso) {
-            $query = "SELECT    apartamento_id,
-                                fecha_entrada,
-                                fecha_salida,
-                                nombre_cliente,
-                                apellidos_cliente,
-                                nif_cliente,
-                                tel_cliente,
-                                correo_cliente,
-                                num_personas,
-                                descuento,
-                                tarifa,
-                                intermediario_id,
-                                comentario
+            $query = "SELECT    i.apartamento_id,
+                                i.fecha_entrada,
+                                i.fecha_salida,
+                                i.nombre_cliente,
+                                i.apellidos_cliente,
+                                i.nif_cliente,
+                                i.tel_cliente,
+                                i.correo_cliente,
+                                i.num_personas,
+                                a.max_personas,
+                                i.descuento,
+                                i.tarifa,
+                                i.intermediario_id,
+                                i.comentario
     
-                      FROM      ingresos
-                      WHERE     id = ?";
+                      FROM      ingresos AS i
+                      JOIN      apartamento AS a
+                            ON  a.id = i.apartamento_id
+                      WHERE     i.id = ?";
             $stmt = $mysqli->prepare($query);
             if($stmt) {
                 $stmt->bind_param('i', $ingreso_id);
@@ -121,11 +124,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br /><br />
                                             <label for="fecha_entrada">Fecha de entrada:*</label>
                                                 <br />
-                                                <input type="date" id="fecha_entrada" name="fecha_entrada" value="' . $row['fecha_entrada'] . '" required>
+                                                <input type="date" class="fecha_formulario" id="fecha_entrada" name="fecha_entrada" value="' . $row['fecha_entrada'] . '" required>
                                                 <br /><br />
                                             <label for="fecha_salida">Fecha de salida:*</label>
                                                 <br />
-                                                <input type="date" id="fecha_salida" name="fecha_salida" value="' . $row['fecha_salida'] . '" required>
+                                                <input type="date" class="fecha_formulario" id="fecha_salida" name="fecha_salida" value="' . $row['fecha_salida'] . '" required>
                                                 <br /><br />
                                             <label for="nombre_cliente">Nombre del cliente:*</label>
                                                 <br />
@@ -147,9 +150,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br />
                                                 <input type="text" id="correo_cliente" name="correo_cliente" maxlength="255" placeholder="Correo del cliente" value="' . $row['correo_cliente'] . '" required>
                                                 <br /><br />
-                                            <label for="num_clientes">Número de personas en la casa:*</label>
+                                            <label for="num_clientes">Número de personas en la casa (Hasta: ' . $row['max_personas'] . '*</label>
                                                 <br />
-                                                <input type="number" step="1" id="num_clientes" name="num_clientes" placeholder="Número de personas" min="1" max="100" value ="1" value="' . $row['num_personas'] . '" required> 
+                                                <input type="number" step="1" id="num_clientes" name="num_clientes" placeholder="Número de personas" min="1" max="' . $row['max_personas'] . '" value ="1" value="' . $row['num_personas'] . '" required> 
                                                 <br /><br />
                                             <label for="descuento">Descuento a aplicar:*</label>
                                                     <br />

@@ -165,6 +165,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $continuar = false;
     }
 
+    if(!verificar_numero_personas($mysqli, $apartamento_id, $num_personas)) {
+        $continuar = false;
+        $mensaje = "Demasiadas personas";
+    }
+
     if ($continuar) {
 
         if(apartamento_libre($mysqli, $apartamento_id, $fecha_entrada, $fecha_salida)) {

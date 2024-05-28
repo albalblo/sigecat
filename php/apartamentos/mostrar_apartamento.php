@@ -45,6 +45,7 @@ $query = "  SELECT  a.id,
                     a.nombre,
                     a.direccion,
                     a.precio_noche,
+                    a.max_personas,
                     a.empresa_id,
                     a.comentario,
                     e.nombre AS nombre_empresa
@@ -80,6 +81,7 @@ if($stmt) {
             $mensaje .= "   <th>Nombre</th>
                             <th>Dirección</th>
                             <th>Precio Noche</th>
+                            <th>Número máximo de personas</th>
                             <th>Comentario</th>
                             <th style='text-align: center;'>Libre</th>
                             <th></th>";
@@ -104,6 +106,7 @@ if($stmt) {
                 $mensaje .= "   <td>" . $row["nombre"] . "</td>
                                 <td>" . $row["direccion"] . "</td>
                                 <td>" . $row["precio_noche"] . "€</td>
+                                <td>" . $row["max_personas"] . "</td>
                                 <td>" . $row["comentario"] . "</td>
                                 <td style='text-align: center;'><img src='" . $libre_icon . "'></td>";
 

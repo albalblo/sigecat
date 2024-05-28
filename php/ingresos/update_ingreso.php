@@ -56,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nif_cliente = trim($mysqli->real_escape_string($_POST['nif_cliente']));
         $tel_cliente = trim($mysqli->real_escape_string($_POST['tel_cliente']));
         $correo_cliente = trim(filter_input(INPUT_POST, 'correo_cliente', FIILTER_SANITIZE_EMAIL));
-        $correo_cliente = filter_var($correo_cliente, FILTER_VALIDATE_EMAIL);    $num_personas = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);        $num_clientes = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);
+        $correo_cliente = filter_var($correo_cliente, FILTER_VALIDATE_EMAIL);    $num_personas = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);
+        $num_clientes = filter_input(INPUT_POST, 'num_clientes', FILTER_VALIDATE_INT);
         $descuento = isset($_POST['descuento']) ? filter_input(INPUT_POST, 'descuento', FILTER_VALIDATE_FLOAT) : 0;
         $tarifa_id = filter_input(INPUT_POST, 'tarifa_id', FILTER_VALIDATE_INT);
         $intermediario_id = $_POST['intermediario_id'] != 0 ? trim($mysqli->real_escape_string($_POST['intermediario_id'])) : "000000000";
@@ -111,6 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
 
                     if(!($correo_cliente === false)) {
+                        $continuar = false;
+                    }
+
+                    if(!verificar_numero_personas($mysqli, $apartamento_id, $num_clientes)) {
                         $continuar = false;
                     }
 

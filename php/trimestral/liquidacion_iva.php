@@ -42,7 +42,7 @@ echo '  <div id="formulario_cambios">
             <form id="formIVA" style="display: block;">
                 <label for="fecha_liquidacion">Fecha de la Liquidación:</label>
                     <br />
-                    <input type="date" id="fecha_liquidacion" name="fecha_liquidacion" value="2024-01-01" required>
+                    <input type="date" class="fecha_formulario" id="fecha_liquidacion" name="fecha_liquidacion" value="2024-01-01" required>
                     <br /><br />
                 <label for="empresa_id">Empresa:</label>
                     <br />

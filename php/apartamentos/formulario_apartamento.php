@@ -42,18 +42,21 @@ echo '  <div id="formulario_cambios">
             <form id="formApartamento" style="display: block;" method="post" action="/php/apartamentos/insert_apartamento.php">
                 <label for="nombre">Nombre del Apartamento:*</label>
                     <input type="text" id="nombre" name="nombre" maxlength="255" placeholder="Nombre del Apartamento" required>
-                <br /><br />
+                    <br /><br />
                 <label for="direccion">Dirección:*</label>
                     <input type="text" id="direccion" name="direccion" maxlength="255" placeholder="Dirección" required>
-                <br /><br />
+                    <br /><br />
                 <label for="precio_noche">Precio por noche:*</label>
                     <input type="number" step="0.01" id="precio_noche" name="precio_noche" placeholder="Precio por Noche" min="0" max="9999.99" required> 
-                <br /><br />
+                    <br /><br />
+                <label for="max_personas">Número máximo de personas:*</label>
+                    <input type="number" step="1" id="max_personas" name="max_personas" placeholder="Número máximo de personas" min="0" max="99" required> 
+                    <br /><br />
                 <label for="empresa_id">Empresa:*</label>
                     <select id="empresa_id" name="empresa_id">' .
                         listar_empresas($mysqli) .
                     '</select>
-                <br /><br /> 
+                    <br /><br /> 
                 <label for="comentario">Comentarios:</label> 
                     <textarea id="comentario" name="comentario" maxlength="255" placeholder="Comentario"></textarea> 
                     <br />

@@ -49,7 +49,7 @@ function listar_empresas($mysqli) {
 }
 
 function listar_apartamentos($mysqli) {
-    $query_apartamentos = "SELECT id, nombre, empresa_id FROM apartamento";
+    $query_apartamentos = "SELECT id, nombre, max_personas, empresa_id FROM apartamento";
     if ($_SESSION['es_root'] == 0) {
         $query_apartamentos .= " WHERE empresa_id = ".$_SESSION['empresa_id'];
     }
@@ -57,7 +57,7 @@ function listar_apartamentos($mysqli) {
     $resultado_apartamentos = $mysqli->query($query_apartamentos);
     $apartamentos = "";
     while ($row = $resultado_apartamentos->fetch_assoc()) {
-        $apartamentos .= "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['nombre']) . "</option>";
+        $apartamentos .= "<option value='" . $row['id'] . "' data-max-personas='" . $row['max_personas'] . "'>" . htmlspecialchars($row['nombre']) . "</option>";
     }
     $resultado_apartamentos->close();
     return $apartamentos;

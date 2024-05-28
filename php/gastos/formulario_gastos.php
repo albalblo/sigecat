@@ -45,7 +45,7 @@ echo '  <div id="formulario_cambios">
                     <br /><br />
                 <label for="fecha_gasto">Fecha del gasto:*</label>
                     <br />
-                    <input type="date" id="fecha_gasto" name="fecha_gasto" value="2024-01-01" required>
+                    <input type="date" class="fecha_formulario" id="fecha_gasto" name="fecha_gasto" value="2024-01-01" required>
                     <br /><br />
                 <label for="gasto_sin_iva">Total del gasto sin IVA:*</label>
                     <br />

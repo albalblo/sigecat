@@ -93,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $query = "SELECT    nombre,
                                     direccion,
                                     precio_noche,
+                                    max_personas,
                                     comentario
                           FROM      apartamento
                           WHERE     id = ?";
@@ -115,6 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <br /><br/>
                                             <label for="precio_noche">Precio por noche:*</label>
                                                 <input type="number" step="0.01" id="precio_noche" name="precio_noche" value="' . htmlspecialchars($row["precio_noche"]) . '" placeholder="Precio por noche" min="0" max="9999.99" required>
+                                                <br /><br/>
+                                            <label for="max_personas">Número máximo de personas:*</label>
+                                                <input type="number" step="1" id="max_personas" name="max_personas" value="' . htmlspecialchars($row["max_personas"]) . '" placeholder="Número máximo de personas" min="1" max="99" required>
                                                 <br /><br/>
                                             <label for="empresa_id">Empresa:*</label>
                                                 <select id="empresa_id" name="empresa_id">' . listar_empresas($mysqli) . '</select>

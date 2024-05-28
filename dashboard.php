@@ -61,6 +61,10 @@
 
     <!-- Librería para generar el PDF con el IVA trimestral -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <!-- Librería para poder mostrar las fechas con un formato más amigable -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
     <body>
@@ -115,13 +119,23 @@
             </div>
         </div>
         <script>
-            // Este script debería poder estar en dashboard.js, pero siempre cargaba antes del DOM, por lo que se extrajo.
+            // Estos scripts deberían poder estar en dashboard.js, pero siempre cargaban antes del DOM, por lo que se movieron.
             function toggleCheckboxes(source) {
                 checkboxes = document.querySelectorAll('.rowCheckbox');
                 for(var i = 0, n = checkboxes.length; i < n; i++) {
                     checkboxes[i].checked = source.checked;
                 }
             }
+            function updateMaxPersonas() {
+                var select = document.getElementById('apartamento_id');
+                var maxPersonas = select.options[select.selectedIndex].getAttribute('data-max-personas');
+                document.getElementById('num_clientes').max = maxPersonas;
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                flatpickr(".fecha_formulario", {
+                    dateFormat: "d-m-Y";
+                });
+            });
         </script>
         <script src="script/dashboard.js" type="module"></script>
     </body>

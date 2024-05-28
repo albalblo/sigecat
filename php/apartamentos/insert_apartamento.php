@@ -43,15 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $mensaje = "";
 
-    if(isset($_POST['nombre']) && isset($_POST['direccion']) && isset($_POST['precio_noche']) && isset($_POST['empresa_id'])) {
+    if(isset($_POST['nombre']) && isset($_POST['direccion']) && isset($_POST['precio_noche']) && isset($_POST['empresa_id']) && isset($_POST['max_personas'])) {
 
         $nombre = trim($mysqli->real_escape_string($_POST['nombre']));
         $direccion = trim($mysqli->real_escape_string($_POST['direccion']));
         $precio_noche = abs(filter_input(INPUT_POST, 'precio_noche', FILTER_VALIDATE_FLOAT));
         $empresa_id = filter_input(INPUT_POST, 'empresa_id', FILTER_VALIDATE_INT);
+        $max_personas = abs(filter_input(INPUT_POST, 'max_personas', FILTER_VALIDATE_INT));
         $comentario = isset($_POST['comentario']) ? trim($mysqli->real_escape_string($_POST['comentario'])) : '';
         $fecha = date('Y-m-d');
-        if(verificar_entidad($mysqli, "empresa", $empresa_id)) {
+        if(verificar_entidad($mysqli, "empresa", $empresa_id) && $max_personas > 0) {
             if(verificar_permisos($mysqli, $_SESSION['usuario'], $empresa_id, false)) {
                 if ((strlen($nombre) < 256) && (strlen($direccion) < 256) && (strlen($comentario) < 256)) {
                     if (is_numeric($precio_noche) && ($precio_noche <= 9999.99)) {

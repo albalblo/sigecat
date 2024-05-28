@@ -117,6 +117,8 @@ function verificar_entidad($mysqli, $entidad, $entidad_id) {
 
         return false;
     }
+    // No se debería llegar aquí en ningún momento
+    return false;
 }
 
 // Permite verificar si un apartamento está libre, en tres configuraciones distintas:
@@ -211,6 +213,8 @@ function verificar_permisos($mysqli, $usuario_id, $empresa_id, $admin_task) {
     } else {
         return true; //El usuario no es root, es de la misma empresa, y la tarea a realizar no requiere de permisos de administrador
     }
+    // No se debería llegar aquí en ningún momento
+    return false;
 }
 
 // Se verifica si un intermediario trabaja con la empresa y, si no, lo crea
@@ -248,6 +252,8 @@ function verificar_intermediario($mysqli, $empresa_id, $intermediario_id) {
         loguear_error("verificar_intermediario", $mysqli->error);
         return false;
     }
+    // No se debería llegar aquí en ningún momento
+    return false;
 }
 
 function insertar_intermediario($mysqli, $intermediario_id, $empresa_id) {
@@ -299,4 +305,36 @@ function insertar_intermediario($mysqli, $intermediario_id, $empresa_id) {
         loguear_error("insertar_intermediario", $mysqli->error);
         return false;
     }
+    // No se debería llegar aquí en ningún momento
+    return false;
+}
+
+function verificar_numero_personas($mysqli, $apartamento_id, $num_personas) {
+    if(!verificar_entidad($mysqli, "apartamento", $apartamento_id)) {
+        return false;
+    }
+
+    $query = "  SELECT  max_personas
+                FROM    apartamento
+                WHERE   id = ?";
+    $stmt = $mysqli->prepare($query);
+
+    if($stmt) {
+        $stmt->bind_param("i", $apartamento_id);
+        if($stmt->execute()) {
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            
+            return $num_personas <= $row['max_personas'];
+        } else {
+            loguear_error("verificar_numero_personas", $stmt->error);
+            return false;
+        }
+    } else {
+        loguear_error("verificar_numero_personas", $mysqli->error);
+        return false;
+    }
+
+    // No se debería llegar aquí en ningún momento
+    return false;
 }
