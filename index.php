@@ -33,11 +33,10 @@
  - SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. -
  -------------------------------------------------------------------------------------------------->
 <?php
-    session_start();
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-
-    if(isset($_SESSION['usuario'])) { //Si el usuario está logeado, se dirige al Dashboard
+    // Si el usuario está logueado, se le redirige al Dashboard. Este es el único punto de la 
+    // aplicación donde sucede esto, en el resto se llamará a una función que llevará el con -
+    // trol de la sesión.
+    if(isset($_SESSION['usuario'])) {
         header("Location: ./dashboard.php");
         exit(0);
     }
@@ -49,16 +48,31 @@
         <meta name="description" content="SIGEcAT: Software de Gestión Económica Alquileres Turísticos.">
         <meta name="keywords" content="SIGEcAT, gestión, alquileres, economía, turismo">
         <meta name="author" content="Alberto A. Alsina Ambrós (IES Joan Coromines)">
+        <!-- Esta es una aplicación demo, no debe ser indexada por buscadores -->
         <meta name="robots" content="noindex, nofollow">
         
         <title>SIGEcAT - Login</title>
         
+        <!--
+            Para la evaluación del proyecto, se puede acceder a la aplicación mediante tres usuarios:
+                ╔══════════════════════════╦══════════════╦═════════════╗
+                ║ Tipo de usuario          ║   Usuario    ║ Contraseña  ║
+                ╠══════════════════════════╬══════════════╬═════════════╣
+                ║ Usuario raíz             │  00000000T   │    root     ║
+                ╟──────────────────────────┼──────────────┼─────────────╢
+                ║ Usuario administrador    │  11111111H   │    admin    ║
+                ╟──────────────────────────┼──────────────┼─────────────╢
+                ║ Usuario normal           │  22222222J   │    user     ║
+                ╚══════════════════════════╧══════════════╧═════════════╝
+        -->
+
         <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+        <!-- Podría tenerse solo un archivo CSS, pero resultaba inmenso -->
         <link rel="stylesheet" href="styles/index.css">
-        </head>
+    </head>
     <body>
         <div class="logo-container">
-            <img src="/icons/logo.png" width="100px" alt="SIGEcAT logo - A minimalist cat in a suit">
+            <img src="/icons/logo.png" width="100px" alt="SIGEcAT logo - Un gato minimalista en traje">
         </div>
         <div class="login-container">
             <h2>Identificación</h2>
@@ -79,6 +93,7 @@
                     <input id="boton-login" type="submit" value="Iniciar sesión">
                 </div>
                 <div id="version">
+                    <!-- La versión es orientativa -->
                     <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
                 </div>
             </form>

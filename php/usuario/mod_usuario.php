@@ -39,45 +39,51 @@ require_once '../funciones/log_errores.php';    // Logueo de los mensajes de err
 
 $query = "SELECT nombre, apellidos FROM usuario WHERE dni = ?";
 $stmt = $mysqli->prepare($query);
+$mensaje = '';
 
 if($stmt) {
-
+    $stmt->bind_param("s", $_SESSION['usuario']);
+    if($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            $mensaje .= '   <div id="formulario_cambios">
+                                <h2>Modificar usuario</h2>  
+                                <form id="updateUsuarioForm" method="post" action="/php/usuario/update_usuario.php">
+                                    <label for="nombre">Nombre:*</label>
+                                        <input type="text" id="nombre" name="nombre" value="' . $row["nombre"] . '" length="255" placeholder="Nombre" required>
+                                        <br /><br/>
+                                    <label for="apellidos">Apellidos:</label>
+                                        <input type="text" id="apellidos" name="apellidos" value="' . $row["apellidos"] . '" length="255" placeholder="Apellidos">
+                                        <br /><br/>
+                                    <label for="nueva_password">Nueva contraseña:</label>
+                                        <input type="password" id="nueva_password" name="nueva_password" placeholder="Nueva contraseña">
+                                        <br /><br/>
+                                    <label for="confirmacion_nueva_password">Repetir nueva contraseña:</label>
+                                        <input type="password" id="confirmacion_nueva_password" name="confirmacion_nueva_password" placeholder="Repetir nueva contraseña">
+                                        <br /><br/>
+                                        <br /><br/>
+                                        <br /><br/>
+                                    <label for="password">Contraseña actual:*</label>
+                                        <input type="password" id="password" name="password" placeholder="Contraseña actual" required>
+                                        <br />
+                                        <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
+                                        <br /><br />
+                                    <button type="submit">Modificar datos de usuario</button>
+                                </form>
+                            </div>';
+        } else {
+            $mensaje = "Usuario no encontrado";
+        }
+    } else {
+        $mensaje = "Error interno inténtelo de nuevo más tarde";
+        loguear_error("mod_usuario", $stmt->error);
+    }
+    
+    $stmt->close();
 } else {
-
+    $mensaje = "Error interno inténtelo de nuevo más tarde";
+    loguear_error("mod_usuario", $mysqli->error);
 }
 
-$stmt->bind_param("s", $_SESSION['usuario']);
-$stmt->execute();
-$result = $stmt->get_result();
-if ($row = $result->fetch_assoc()) {
-    echo '  <div id="formulario_cambios">
-                <h2>Modificar usuario</h2>  
-                <form id="updateUsuarioForm" method="post" action="/php/usuario/update_usuario.php">
-                    <label for="nombre">Nombre:*</label>
-                        <input type="text" id="nombre" name="nombre" value="'.$row["nombre"].'" length="255" placeholder="Nombre" required>
-                        <br /><br/>
-                    <label for="apellidos">Apellidos:</label>
-                        <input type="text" id="apellidos" name="apellidos" value="'.$row["apellidos"].'" length="255" placeholder="Apellidos">
-                        <br /><br/>
-                    <label for="nueva_password">Nueva contraseña:</label>
-                        <input type="password" id="nueva_password" name="nueva_password" placeholder="Nueva contraseña">
-                        <br /><br/>
-                    <label for="confirmacion_nueva_password">Repetir nueva contraseña:</label>
-                        <input type="password" id="confirmacion_nueva_password" name="confirmacion_nueva_password" placeholder="Repetir nueva contraseña">
-                        <br /><br/>
-                        <br /><br/>
-                        <br /><br/>
-                    <label for="password">Contraseña actual:*</label>
-                        <input type="password" id="password" name="password" placeholder="Contraseña actual" required>
-                        <br />
-                        <p id="footnote">Los campos marcados con un asterisco (*) son obligatorios</p>
-                        <br /><br />
-                    <button type="submit">Modificar datos de usuario</button>
-                </form>
-            </div>';
-} else {
-    echo "Usuario no encontrado";
-}
-$stmt->close();
+echo $mensaje;
 $mysqli->close();
-?>

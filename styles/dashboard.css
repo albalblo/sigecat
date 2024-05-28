@@ -32,8 +32,7 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-/* Aplicar box-sizing a todos los elementos */
-*, *::before, *::after {
+ *, *::before, *::after {
     box-sizing: border-box;
 }
 

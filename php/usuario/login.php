@@ -33,22 +33,35 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
- ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
+/**************************************************************************************************
+ * Para la evaluación del proyecto, se puede acceder a la aplicación mediante tres usuarios:      *
+ *                                                                                                *
+ * ╔══════════════════════════╦══════════════╦═════════════╗                                      *
+ * ║ Tipo de usuario          ║   Usuario    ║ Contraseña  ║                                      *
+ * ╠══════════════════════════╬══════════════╬═════════════╣                                      *
+ * ║ Usuario raíz             │  00000000T   │    root     ║                                      *
+ * ╟──────────────────────────┼──────────────┼─────────────╢                                      *
+ * ║ Usuario administrador    │  11111111H   │    admin    ║                                      *
+ * ╟──────────────────────────┼──────────────┼─────────────╢                                      *
+ * ║ Usuario normal           │  22222222J   │    user     ║                                      *
+ * ╚══════════════════════════╧══════════════╧═════════════╝                                      *
+ *                                                                                                *
+ **************************************************************************************************/
 
 require_once '../funciones/con_db.php';      // Conexión con la base de datos
 
 session_start();
 
 function login_incorrecto($statement = null) {
-    header("Location: ../../index.php?login=failed"); // Vuelta a index.php pero con una flag para que muestre el mensaje de error
+    header("Location: ../../index.php?login=failed"); // Vuelta a index.php pero con una 'flag' para que muestre el mensaje de error
     if($statement) {
         $statement->close();
     }
     exit(0);
 }
 
-function loguear_error($loc, $err) { // La función normal requiere de una sesión activa, por lo que redefino una aquí para antes del log in
+function loguear_error($loc, $err) { // La función normal requiere de una sesión activa, por lo que se redefinr una aquí para antes del log-in
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
     $ip = $_SERVER['REMOTE_ADDR'];
@@ -59,7 +72,7 @@ function loguear_error($loc, $err) { // La función normal requiere de una sesi�
 }
 
 
-if (isset($_SESSION['usuario'])) { // Si el usuario ya está logeado, se redirige al dashboard
+if (isset($_SESSION['usuario'])) { // Si el usuario ya está logeado, se redirige al Dashboard
     header("Location: ../../dashboard.php");
     exit(0);
 } 
@@ -69,6 +82,8 @@ if (isset($_POST['dni']) && isset($_POST['pass'])) {
     $submittedPassword = $_POST['pass'];
     
     // Para proteger contra inyecciones de SQL, usaré 'statements'
+    // No es necesario comprobar si el DNI es un DNI válido, solo
+    // si está en la base de datos
     $query = "  SELECT  nombre,
                         apellidos,
                         pass,
@@ -86,7 +101,7 @@ if (isset($_POST['dni']) && isset($_POST['pass'])) {
             $result = $stmt->get_result();
 
             if ($result->num_rows == 1) {
-                $user = $result->fetch_assoc(); // Se guardan los detalles del usuario en un array asociativo
+                $user = $result->fetch_assoc();
 
                 if (password_verify($submittedPassword, $user['pass'])) { // Hasheado para evitar guardar la contraseña en texto plano en la base de datos.
                     $_SESSION['usuario'] = $dni;                          // El usuario
@@ -101,6 +116,8 @@ if (isset($_POST['dni']) && isset($_POST['pass'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];                        // IP del usuario
                     $mensaje_login = "[" . $fecha . "][" . $hora . "] - Login correcto de " . $dni . " desde [" . $ip . "]\n";
 
+                    // Los permisos del archivo de logs de acceso y de logs de errores están puestos a 777. Si esto no se transfiere en la entrega del proyecto,
+                    // deben ser modificados
                     $logFile = '../../logs/access.log';
                     file_put_contents($logFile, $mensaje_login, FILE_APPEND | LOCK_EX);
 

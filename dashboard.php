@@ -33,9 +33,12 @@
  - SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. -
  -------------------------------------------------------------------------------------------------->
 <?php
+    // Podría hacerse una llamada a las funciones, pero en más de una ocasión ha dado problemas al
+    // reconocer la sesión. Como el Dashboard es lo primero que se carga, se ha preferido mantener
+    // una llamada explícita.
     session_start();
 
-    if(!isset($_SESSION['usuario'])) { //Si el usuario no está logeado, se vuelve al login
+    if(!isset($_SESSION['usuario'])) {
         header("Location: ./index.php");
         exit(0);
     }
@@ -48,6 +51,7 @@
     <meta name="description" content="Dashboard de SIGEcAT: Software de Gestión Económica Alquileres Turísticos.">
     <meta name="keywords" content="SIGEcAT, dashboard, gestión, alquileres, economía, turismo">
     <meta name="author" content="Alberto A. Alsina Ambrós (IES Joan Coromines)">
+    <!-- Esta es una aplicación demo, no debe ser indexada por buscadores -->
     <meta name="robots" content="noindex, nofollow">
     
     <title>SIGEcAT - Dashboard</title>
@@ -65,8 +69,9 @@
                 <div id="usuario">
                     <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit" width="64px"></img>
                     <?php
-                        echo "<h1>".$_SESSION['nombre']." ".$_SESSION['apellidos']."</h1>";
+                        echo "<h1>" . $_SESSION['nombre'] . " " . $_SESSION['apellidos'] . "</h1>";
                     ?>
+                    <!-- Para evitar cambios de página, no es un <a>, sino que se tratará con JavaScript -->
                     <p id="mod-perfil"><i>Modificar perfil...</i></p>
                 </div>
                 <div id="botones">
@@ -110,6 +115,7 @@
             </div>
         </div>
         <script>
+            // Este script debería poder estar en dashboard.js, pero siempre cargaba antes del DOM, por lo que se extrajo.
             function toggleCheckboxes(source) {
                 checkboxes = document.querySelectorAll('.rowCheckbox');
                 for(var i = 0, n = checkboxes.length; i < n; i++) {

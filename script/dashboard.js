@@ -32,6 +32,14 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
+/**************************************************************************************************
+ * El documento está dividido en cuatro partes diferenciadas:                                     *
+ *         - Funciones de la barra lateral y de la barra superior                                 *
+ *         - Funciones de los popups de información                                               *
+ *         - Funciones de los iconos de editar y eliminar                                         *
+ *         - Funciones de AJAX para tratar con formularios                                        *
+ **************************************************************************************************/
+
 document.addEventListener('DOMContentLoaded', function () {
     var cuerpo = document.getElementById('cuerpo');
     var popup_info = document.getElementById('popup-info');
@@ -40,10 +48,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var closeBtn = document.querySelector('.close-btn');
     var botones_topbar = document.querySelectorAll('.boton-topbar');
 
-    // Genera un documento PDF utilizando la libreria html2pdf 
+    // Llamada a la función para generar un documento PDF utilizando la libreria html2pdf 
     document.getElementById('pdf-contable').addEventListener('click', generarPDF);
 
-    // Usuario
+/**************************************************************************************************
+ *                     Funciones de la barra lateral y de la barra superior                       *
+ **************************************************************************************************
+ *                                            Usuario                                             *
+ **************************************************************************************************/
+
     // Logout
     document.getElementById('cerrar-sesion').addEventListener('click', function() {
         window.location.href = '../php/usuario/logout.php';
@@ -71,7 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Apartamentos
+ /**************************************************************************************************
+ *                                          Apartamentos                                           *
+ **************************************************************************************************/
+
+    // Listar apartamentos
     document.getElementById('listado-apartamentos').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -79,11 +96,17 @@ document.addEventListener('DOMContentLoaded', function () {
         boton_añadir.style.display = "inline";
         fetchContent('../php/apartamentos/mostrar_apartamento.php');
     });
+
+    // Añadir apartamento
     document.getElementById('añadir-apartamento').addEventListener('click', function() {
         fetchContent('../php/apartamentos/formulario_apartamento.php');
     });
 
-    // Ingresos
+
+ /**************************************************************************************************
+ *                                            Ingresos                                             *
+ **************************************************************************************************/
+    // Listar ingresos
     document.getElementById('listado-ingresos').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -91,11 +114,18 @@ document.addEventListener('DOMContentLoaded', function () {
         boton_añadir.style.display = "inline";
         fetchContent('../php/ingresos/mostrar_ingresos.php');
     });
+
+    // Añadir ingresos
     document.getElementById('añadir-ingreso').addEventListener('click', function() {
         fetchContent('../php/ingresos/formulario_ingresos.php');
     });
 
-    // Gastos
+
+ /**************************************************************************************************
+ *                                             Gastos                                              *
+ **************************************************************************************************/
+
+    // Listar gastos
     document.getElementById('listado-gastos').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -103,11 +133,18 @@ document.addEventListener('DOMContentLoaded', function () {
         boton_añadir.style.display = "inline";
         fetchContent('../php/gastos/mostrar_gastos.php');
     });
+
+    // Añadir gasto
     document.getElementById('añadir-gasto').addEventListener('click', function() {
         fetchContent('../php/gastos/formulario_gastos.php');
     });
 
-    // Asiento contable de ingresos y gastos
+
+ /**************************************************************************************************
+ *                                        Asiento contable                                         *
+ **************************************************************************************************/
+
+    // Se listan los gastos
     document.getElementById('asiento-contable').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -115,6 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
         boton_continuar.style.display = "inline";
         fetchContent('../php/asiento_contable/asiento_gastos.php');
     });
+
+    // Se listan los ingresos y, escondido, se guarda el ID de los gastos seleccionados
     document.getElementById('siguiente-contable').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -129,9 +168,6 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedIds.push(checkbox.value);
             formData.append('ids[]', checkbox.value);
         });
-
-        console.log(selectedIds);
-
         fetch('../php/asiento_contable/asiento_ingresos.php', {
             method: 'POST',
             body: formData
@@ -146,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Se muestra el resultado del asiento contable por pantalla
     document.getElementById('mostrar-contable').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -177,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Función legacy, a refactorizar
     function postData(url = '', formData) {
         return fetch(url, {
             method: 'POST',
@@ -185,7 +223,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text());
     }
 
-    // Liquidación trimestral de IVA
+
+ /**************************************************************************************************
+ *                                     Liquidacion trimestral                                      *
+ **************************************************************************************************/
+
+    // Pantalla de selección de fecha y empresa
     document.getElementById('liquidacion-trimestral').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
             boton_topbar.style.display = "none");
@@ -213,7 +256,14 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    // Popup
+
+
+/**************************************************************************************************
+ *                            Funciones de los popups de información                              *
+ **************************************************************************************************
+ *                               Handler del icono de información                                 *
+ **************************************************************************************************/
+
     function handleInfoIcon(event) {
         var nextCell = event.target.parentNode.nextElementSibling;
         if (nextCell) {
@@ -222,6 +272,11 @@ document.addEventListener('DOMContentLoaded', function () {
             popup_info.style.display = 'flex';
         }
     }
+
+
+ /**************************************************************************************************
+ *                                 Handler del icono de delete                                     *
+ **************************************************************************************************/
 
     function handleDelete(event, entity, endpoint, dataKey) {
         if (confirm(`¿Estás seguro de que deseas eliminar este ${entity}?`)) {
@@ -245,6 +300,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+
+ /**************************************************************************************************
+ *                                Handler del icono de edicion                                     *
+ **************************************************************************************************/
+
     function handleEdit(event, endpoint, dataKey) {
         let valor = event.target.getAttribute('data-value');
         const formData = new FormData();
@@ -263,6 +323,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('cuerpo').innerHTML = 'Error al cargar los datos.';
         });
     }
+
+
+ /**************************************************************************************************
+ *                                  Handler del botón del IVA                                      *
+ **************************************************************************************************/
 
     function handleFormIVA(event) {
         const form = document.getElementById('formIVA');
@@ -285,6 +350,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+
+/**************************************************************************************************
+ *                         Funciones de los iconos de editar y eliminar                           *
+ **************************************************************************************************/
+
+    // Definición de los handlers y sus eventos relacionados
     const handlers = {
         'info-icon': handleInfoIcon,
         'delete-apartamento-icon': (event) => handleDelete(event, 'apartamento', '../php/apartamentos/eliminar_apartamento.php', 'id_apart'),

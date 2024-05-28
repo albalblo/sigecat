@@ -33,13 +33,14 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-require_once '../funciones/con_db.php';     // Conexión con la base de datos
-require_once '../funciones/config.php';     // Configuración de la página y verificación de sesión
-require_once '../funciones/listar.php';     // Funciones de visualización
-require_once '../funciones/verificar.php';  // Funciones de verificación
+require_once '../funciones/con_db.php';         // Conexión con la base de datos
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
+require_once '../funciones/verificar.php';      // Funciones de verificación
 require_once '../funciones/log_errores.php';    // Logueo de los mensajes de error en un archivo
 
-// Funciones solo para este archivo
+// Estas funciones solo se definen para este cálculo, por lo que no vale la pena tenerlas aparte.
+// Ambas toman una fila de la tabla correspondiente y realizan algunos cálculos según la infor-
+// mación que contenga
 function trimestral_gastos($row_gastos) {
     $gastos_array = [];
     $tipo_gasto = $row_gastos['gasto_interno'] == 1 ? "interno<br />" : "externo<br />";
@@ -158,7 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <div><p>' . $trimestre_inicio_ok . ' - ' . $trimestre_fin_ok . '</p></div>
                                             <div><p>A presentar: <span ' . $estado_presentacion . '>' . $presentacion_inicio_ok . ' - ' . $presentacion_fin_ok . '</span></p></div>
                                         </div>';
-            // Prueba solo con ingresos por ahora
 
             $gastos_ok = true;
             $ingresos_ok = true;

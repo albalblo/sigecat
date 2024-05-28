@@ -35,21 +35,22 @@
 
 session_start();
 
+// Se guarda temporalmente en caso de que haya un error con la destrucción de la sesión
 $dni = $_SESSION['usuario'];
 // Destruir las variables de sesión
 session_unset();
 // Destruir la sesión
 session_destroy();
 
-$session_var = "";
+$sesion_var = "";
 
 if(isset($_SESSION['usuario'])) { //Si el usuario no está logeado, se vuelve al login
-    $session_var = "<div>Error al cerrar sesión, inténtelo de nuevo o contacte con el administrador de sistemas</p>";
+    $sesion_var = "<div>Error al cerrar sesión, inténtelo de nuevo o contacte con el administrador de sistemas</p>";
     
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
     $ip = $_SERVER['REMOTE_ADDR']; // IP del usuario
-    $mensaje_error = "[".$fecha."][".$hora."] - Error en el logout de ".$dni." desde [".$ip."]\n";
+    $mensaje_error = "[" . $fecha . "][" . $hora . "] - Error en el logout de " . $dni . " desde [" . $ip . "]\n";
 
     $logFile = '../../logs/error.log';
     file_put_contents($logFile, $mensaje_error, FILE_APPEND | LOCK_EX);
@@ -63,10 +64,10 @@ if(isset($_SESSION['usuario'])) { //Si el usuario no está logeado, se vuelve al
     $logFile = '../../logs/access.log';
     file_put_contents($logFile, $mensaje_logout, FILE_APPEND | LOCK_EX);
 
+    // Dentro de la aplicación se ha usado JavaScript, pero en estos casos es más seguro tomar un enfoque
+    // 'duro' y utilizar PHP directamente para que se fuerze la interrupción de otro código
     header("Location: ../../index.php");
     exit(0);
 }
 
-echo $session_var;
-
-?>
+echo $sssion_var;

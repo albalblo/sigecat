@@ -45,59 +45,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordActual = $_POST['password'];
     $dni = $_SESSION['usuario'];
 
-    $stmt = $mysqli->prepare("SELECT pass FROM usuario WHERE dni = ?");
-    $stmt->bind_param("s", $dni);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+    $query = "SELECT pass FROM usuario WHERE dni = ?";
+    $mensaje = '';
 
-    if (password_verify($passwordActual, $user['pass'])) {
-        // Start the update query
-        $update = "UPDATE usuario SET nombre = ?, apellidos = ?";
-        $types = "ss";
-        $params = [$nombreNuevo, $apellidosNuevo];
+    $stmt = $mysqli->prepare($query);
 
-        // Check if new password should be updated
-        if (!empty($passwordNuevo) && $passwordNuevo === $passwordNuevo_confirmacion) {
-            $hashedPassword = password_hash($passwordNuevo, PASSWORD_DEFAULT);
-            $update .= ", pass = ?";
-            $types .= "s";
-            array_push($params, $hashedPassword);
-        }
+    if($stmt) {
+        $stmt->bind_param("s", $dni);
+        if($stmt->execute()) {
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+        
+            // La contraseña está hasheada, por lo que no se puede comparar directamente
+            if (password_verify($passwordActual, $user['pass'])) {
+                $update = "UPDATE usuario SET nombre = ?, apellidos = ?";
+                // Se definen los tipos y parámetros a parte porque el usuario puede actualizar su contraseña o no
+                $types = "ss";
+                $params = [$nombreNuevo, $apellidosNuevo];
 
-        $update .= " WHERE dni = ?";
-        $types .= "s";
-        array_push($params, $dni);
+                if (!empty($passwordNuevo) && $passwordNuevo === $passwordNuevo_confirmacion) {
+                    $hashedPassword = password_hash($passwordNuevo, PASSWORD_DEFAULT);
+                    $update .= ", pass = ?";
+                    $types .= "s";
+                    array_push($params, $hashedPassword);
+                }
 
-        $stmt = $mysqli->prepare($update);
-        $stmt->bind_param($types, ...$params);
-        if ($stmt->execute()) {
+                $update .= " WHERE dni = ?";
+                $types .= "s";
+                array_push($params, $dni);
 
-            $_SESSION['nombre'] = $nombreNuevo;
-            $_SESSION['apellidos'] = $apellidosNuevo;
+                $stmt = $mysqli->prepare($update);
+                if($stmt) {
+                    $stmt->bind_param($types, ...$params);
+                    if ($stmt->execute()) {
 
-            echo "<script>
-                    alert('Usuario actualizado correctamente');
-                    window.location.href='../../dashboard.php';
-                  </script>";
+                        //Se hace el cambio ahora para que se vea reflejado en la barra lateral
+                        $_SESSION['nombre'] = $nombreNuevo;
+                        $_SESSION['apellidos'] = $apellidosNuevo;
+                        $mensaje = "Usuario actualizado correctamente";
+
+                    } else {
+                        $mensaje = "Ha habido un error, inténtelo de nuevo";
+                        loguear_error("update_usuario", $stmt->error);
+                    }
+                } else {
+                    $mensaje = "Error interno, inténtelo de nuevo más tarde";
+                    loguear_error("update_usuario", $mysqli->error);
+                }
+            } else {
+                $mensaje = "La contraseña actual es incorrecta";
+            }
         } else {
-            $fecha = date('Y-m-d');
-            $hora = date('H:i:s');
-            $ip = $_SERVER['REMOTE_ADDR']; // IP del usuario
-            $mensaje_error = "[" . $fecha . "][" . $hora . "] - Error en el update_usuario de " . $dni . " desde [" . $ip . "]: " . $mysqli->error . ".";
-
-            $logFile = '../../logs/error.log';
-            file_put_contents($logFile, $mensaje_error, FILE_APPEND | LOCK_EX);
-            echo "<script>
-                    alert('Ha habido un error, inténtelo de nuevo.');
-                    window.location.href='../../dashboard.php';
-                  </script>";
+            $mensaje = "Error interno, inténtelo de nuevo más tarde";
+            loguear_error("update_usuario", $stmt->error);
         }
         $stmt->close();
     } else {
-        echo "<script>
-                alert('La contraseña actual es incorrecta');
-                window.location.href='../../dashboard.php';
-              </script>";
+        $mensaje = "Error interno, inténtelo de nuevo más tarde";
+        loguear_error("update_usuario", $mysqli->error);
     }
+
+$mysqli->close();
+
+echo "  <script>
+            alert('" . $mensaje . "');
+            window.location.href='../../dashboard.php';
+        </script>";
+
 }
