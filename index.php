@@ -94,7 +94,7 @@
                 </div>
                 <div id="version">
                     <!-- La versión es orientativa -->
-                    <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
+                    <p>SIGEcAT - Versión 1.2<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
                 </div>
             </form>
         </div>

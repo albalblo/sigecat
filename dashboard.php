@@ -93,7 +93,7 @@
                 <div id="boton-logout">
                     <button class="boton-logout" id="cerrar-sesion" type="button">Cerrar sesión</button>
                     <div id="version">
-                        <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a> | <a href="mailto:sigecat@albertoalsina.es" target="_blank">Contacto</a></p>
+                        <p>SIGEcAT - Versión 1.2<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a> | <a href="mailto:sigecat@albertoalsina.es" target="_blank">Contacto</a></p>
                     </div>
                 </div>
             </div>
