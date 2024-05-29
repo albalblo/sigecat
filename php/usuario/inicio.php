@@ -33,24 +33,11 @@
  * SE        HA    ADVERTIDO    DE           LA        POSIBILIDAD     DE            TALES DAÑOS. *
  **************************************************************************************************/
 
-DEFINE("SERVER_DB", "albertyroot.mysql.db");
-DEFINE("USER_DB", "albertyroot");
-DEFINE("PASS_DB", "Theure32");
-DEFINE("NAME_DB", "albertyroot");
+// Sencillamente vuelve a mostrar el mensajde de "Seleccione una opción para continuar..."
 
-mysqli_report(MYSQLI_REPORT_STRICT); // Se activan las excepciones para poder guardar los logs de error
+require_once '../funciones/config.php';         // Configuración de la página y verificación de sesión
 
-try {
-    $mysqli = new mysqli(SERVER_DB, USER_DB, PASS_DB, NAME_DB);
-    $mysqli->set_charset("utf8");
-} catch (mysqli_sql_exception $e) {
-    $fecha = date('Y-m-d');
-    $hora = date('H:i:s');
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $mensaje_error = "[" . $fecha . "][" . $hora . "] - Error de conexión con la base de datos desde [" . $ip . "]: " . $e->getMessage() . "\n";
+$mensaje = '<p>Seleccione una opción para continuar...</p>';
 
-    $logFile = '../../logs/error.log';
-    file_put_contents($logFile, $mensaje_error, FILE_APPEND | LOCK_EX);
+echo $mensaje;
 
-    die("Error de conexión con la base de datos. Por favor, intente más tarde.");
-}

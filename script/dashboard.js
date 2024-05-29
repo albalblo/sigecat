@@ -62,6 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = '../php/usuario/logout.php';
     });
 
+    //Vuelta a inicio clickando el logo
+    document.getElementById('logo-sigecat').addEventListener('click', function() {
+        fetchContent('../php/usuario/inicio.php');
+    });
+
     // Modificar perfil
     document.getElementById('mod-perfil').addEventListener('click', function() {
         botones_topbar.forEach((boton_topbar) =>
@@ -384,15 +389,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Cerrar popups
     closeBtn.addEventListener('click', function() {
         popup_info.style.display = 'none';
-        popup_changes.style.display = 'none';
     });
 
     window.onclick = function(event) {
         if (event.target === popup_info || event.target === popup_changes) {
             popup_info.style.display = 'none';
-            popup_changes.style.display = 'none';
         }
     };
+    window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            popup_info.style.display = 'none';
+        }
+    });
 
     // Mostrar contenido en el cuerpo del dashboard
     function fetchContent(url, callback) {
@@ -448,3 +456,9 @@ function generarPDF() {
         jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' } // En portrait la tabla no queda bien, demasiados datos
     });
 }
+
+
+// Prueba de inserción de esta función aquí, para asegurar su carga
+flatpickr(".fecha_formulario", {
+		   	dateFormat: "d-m-Y",
+	    	    });

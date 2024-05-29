@@ -71,7 +71,7 @@
         <div class="dashboard-container">
             <div class="sidebar">
                 <div id="usuario">
-                    <img src="/icons/logo.png" alt="SIGEcAT logo - A minimalist cat in a suit" width="64px"></img>
+                    <img src="/icons/logo.png" alt="SIGEcAT logo - Un gato minimalista en traje" id="logo-sigecat" width="64px"></img>
                     <?php
                         echo "<h1>" . $_SESSION['nombre'] . " " . $_SESSION['apellidos'] . "</h1>";
                     ?>
@@ -93,7 +93,7 @@
                 <div id="boton-logout">
                     <button class="boton-logout" id="cerrar-sesion" type="button">Cerrar sesión</button>
                     <div id="version">
-                        <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a></p>
+                        <p>SIGEcAT - Versión 1.1<br /><a href="https://github.com/albalblo/sigecat" target="_blank">Github</a> | <a href="mailto:sigecat@albertoalsina.es" target="_blank">Contacto</a></p>
                     </div>
                 </div>
             </div>
@@ -132,9 +132,9 @@
                 document.getElementById('num_clientes').max = maxPersonas;
             }
             document.addEventListener('DOMContentLoaded', function() {
-                flatpickr(".fecha_formulario", {
-                    dateFormat: "d-m-Y";
-                });
+		    flatpickr(".fecha_formulario", {
+		   	dateFormat: "d-m-Y",
+	    	    });
             });
         </script>
         <script src="script/dashboard.js" type="module"></script>

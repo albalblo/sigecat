@@ -114,7 +114,7 @@ if($stmt) {
                                 <p><b>Fecha del gasto:</b> " . $fecha_ok . "</p>
                                 <p><b>Tipo de gasto:</b> " . $tipo_gasto . "</p>";
 
-                if ($row["gasto_interno"]) {
+                if (!$row["gasto_interno"]) {
                     $datos_popup .= "<p><b>NIF del proveedor:</b> " . $row["nif_proveedor"] . "</p>
                                     <p><b>Total del gasto sin IVA:</b> " . $row["total_gasto"] .  "</p>
                                     <p><b>IVA: 21%</b></p>

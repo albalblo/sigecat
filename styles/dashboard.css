@@ -333,3 +333,7 @@ td:last-child, th:last-child {
 #version a:active {
     color: #fff;
 }
+
+#logo-sigecat {
+    cursor: pointer;
+}
