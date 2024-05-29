@@ -131,6 +131,8 @@ if($stmt) {
                                 <p><b>Concepto:</b> " . $row["concepto"] . "</p>";
         
                 $mensaje .= "<tr>";
+		
+		$nif_proveedor = $row['gasto_interno'] ? '[Gasto interno]' : $row['nif_proveedor'];
 
                 if ($_SESSION['es_root']) {
                     $mensaje .= '   <td>' . $row['id'] . '</td>
@@ -138,7 +140,7 @@ if($stmt) {
                 }
                 $mensaje .= '   <td>' . $row['concepto'] . '</td>
                                 <td>' . $fecha_ok . '</td>
-                                <td>' . $row['nif_proveedor'] . '</td>
+                                <td>' . $nif_proveedor . '</td>
                                 <td>' . $row['total_gasto'] . '</td>';
 
                 $mensaje .= $row['gasto_interno'] == 1 ? '<td>0%</td>' : '<td>21%</td>';
